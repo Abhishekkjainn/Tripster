@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "1062925961234",
+    "project_id": "tripster-production",
+    "storage_bucket": "tripster-production.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1062925961234:android:5cb59553bcf1b02d20f0cb",
+        "android_client_info": {
+          "package_name": "com.example.tripster"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1062925961234-denofsrefjefis0nealt25srojb6jcp5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.tripster",
+            "certificate_hash": "76c72352429d3a04223c01a756e0da34bd582471"
+          }
+        },
+        {
+          "client_id": "1062925961234-pklg0jlmeho38a0e729l8aofctste0mq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCoBwA1hEkZrW3W4UtvO7DwwdGx2Dak-Vc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1062925961234-pklg0jlmeho38a0e729l8aofctste0mq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1062925961234-9ch5tkdqiv2769ja9pmocapefr49dvtu.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.tripster"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
