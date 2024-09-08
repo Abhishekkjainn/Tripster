@@ -15,6 +15,7 @@ class _PassengerAndClassState extends State<PassengerAndClass> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: SelectFromAppbar(),
       body: GetBuilder<AirportController>(
         builder: (controller) {

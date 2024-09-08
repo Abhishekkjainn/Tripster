@@ -107,7 +107,7 @@ SingleChildScrollView ticket(
     String BookingID) {
   return SingleChildScrollView(
     child: Padding(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.only(left: 20,right:20,top:20),
       child: Column(
         children: [
           IntrinsicHeight(

@@ -44,6 +44,7 @@ class _SelectedFlightState extends State<SelectedFlight> {
     return GetBuilder<OnewayController>(
       builder: (OnewayController) {
         return Scaffold(
+          backgroundColor: Colors.white,
           extendBody: false,
           appBar: FlightTypeAppbar(),
           body: FlightTypeBody(),
@@ -180,12 +181,15 @@ class _SelectedFlightState extends State<SelectedFlight> {
           onPressed: () {
             Get.back();
           },
-          icon: Icon(CupertinoIcons.back)),
+          icon: Icon(
+            CupertinoIcons.back,
+            color: Colors.white,
+          )),
       backgroundColor: Color.fromARGB(255, 255, 214, 0),
       title: Text(
         'Flight Type',
         style: TextStyle(
-            color: Colors.white, fontSize: 20, fontWeight: FontWeight.w900),
+            color: Colors.white, fontSize: 20, fontWeight: FontWeight.w600),
       ),
     );
   }
@@ -289,9 +293,9 @@ class _SelectedFlightState extends State<SelectedFlight> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Icon(
-                        CupertinoIcons.bolt_circle_fill,
-                        size: 14,
+                      Image(
+                        image: AssetImage('assets/images/cabinbag.png'),
+                        width: 14,
                       ),
                       SizedBox(
                         width: 5,
@@ -321,9 +325,9 @@ class _SelectedFlightState extends State<SelectedFlight> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Icon(
-                        CupertinoIcons.bolt_circle_fill,
-                        size: 14,
+                     Image(
+                        image: AssetImage('assets/images/checkingbag.png'),
+                        width: 14,
                       ),
                       SizedBox(
                         width: 5,
@@ -352,9 +356,9 @@ class _SelectedFlightState extends State<SelectedFlight> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Icon(
-                        CupertinoIcons.bolt_circle_fill,
-                        size: 14,
+                     Image(
+                        image: AssetImage('assets/images/forbidden.png'),
+                        width: 14,
                       ),
                       SizedBox(
                         width: 5,
@@ -489,9 +493,9 @@ class _SelectedFlightState extends State<SelectedFlight> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Icon(
-                        CupertinoIcons.bolt_circle_fill,
-                        size: 14,
+                      Image(
+                        image: AssetImage('assets/images/cabinbag.png'),
+                        width: 14,
                       ),
                       SizedBox(
                         width: 5,
@@ -519,9 +523,9 @@ class _SelectedFlightState extends State<SelectedFlight> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Icon(
-                        CupertinoIcons.bolt_circle_fill,
-                        size: 14,
+                      Image(
+                        image: AssetImage('assets/images/checkingbag.png'),
+                        width: 14,
                       ),
                       SizedBox(
                         width: 5,
@@ -549,9 +553,9 @@ class _SelectedFlightState extends State<SelectedFlight> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Icon(
-                        CupertinoIcons.bolt_circle_fill,
-                        size: 14,
+                      Image(
+                        image: AssetImage('assets/images/forbidden.png'),
+                        width: 14,
                       ),
                       SizedBox(
                         width: 5,
@@ -633,15 +637,19 @@ class _SelectedFlightState extends State<SelectedFlight> {
                         style: TextStyle(
                             color: Colors.black,
                             fontSize: 20,
-                            fontWeight: FontWeight.w900),
+                            fontWeight: FontWeight.w700),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 10, right: 10),
-                        child: Icon(
-                          (whichlist == 0 || whichlist == 1)
-                              ? CupertinoIcons.arrow_right
-                              : CupertinoIcons.airplane,
-                          size: 20,
+                        child: Image(
+                          image: (whichlist == 0 || whichlist == 1)
+                              ? AssetImage(
+                                  'assets/images/onewayarrow.png',
+                                )
+                              : AssetImage(
+                                  'assets/images/twowayarrow.png',
+                                ),
+                          width: 20,
                         ),
                       ),
                       Text(
@@ -655,7 +663,7 @@ class _SelectedFlightState extends State<SelectedFlight> {
                         style: TextStyle(
                             color: Colors.black,
                             fontSize: 20,
-                            fontWeight: FontWeight.w900),
+                            fontWeight: FontWeight.w700),
                       ),
                     ],
                   ),
@@ -667,17 +675,18 @@ class _SelectedFlightState extends State<SelectedFlight> {
                         child: Text(
                           (whichlist == 0)
                               ? formatDate(
-                                  airportController.OnewayDate.toString())
+                                      airportController.OnewayDate.toString()) +
+                                  ' ~'
                               : (whichlist == 1)
                                   ? formatDate(airportController.RoundTripStart
                                       .toString())
                                   : formatDate(airportController.RoundTripEnds
                                           .toString()) +
-                                      ' ~',
+                                      ' ~ ',
                           style: TextStyle(
                               color: Colors.grey,
                               fontSize: 13,
-                              fontWeight: FontWeight.bold),
+                              fontWeight: FontWeight.w600),
                         ),
                       ),
                       Padding(
@@ -709,7 +718,7 @@ class _SelectedFlightState extends State<SelectedFlight> {
                           style: TextStyle(
                               color: Colors.grey,
                               fontSize: 13,
-                              fontWeight: FontWeight.bold),
+                              fontWeight: FontWeight.w600),
                         ),
                       ),
                     ],
@@ -807,8 +816,8 @@ class _SelectedFlightState extends State<SelectedFlight> {
                                     returnController.Flightname2[index],
                         style: TextStyle(
                             color: Colors.black,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w900),
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600),
                       )
                     ],
                   ),
@@ -834,7 +843,7 @@ class _SelectedFlightState extends State<SelectedFlight> {
                                             .split('T')[1],
                                 style: TextStyle(
                                     color: Colors.black,
-                                    fontWeight: FontWeight.w900,
+                                    fontWeight: FontWeight.w700,
                                     fontSize: 16),
                               ),
                               Text(
@@ -860,7 +869,7 @@ class _SelectedFlightState extends State<SelectedFlight> {
                                 style: TextStyle(
                                   color: Colors.grey,
                                   fontSize: 12,
-                                  fontWeight: FontWeight.w800,
+                                  fontWeight: FontWeight.w600,
                                 ),
                               )
                             ],
@@ -895,7 +904,7 @@ class _SelectedFlightState extends State<SelectedFlight> {
                             ),
                             Image(
                               image: AssetImage('assets/images/divider.png'),
-                              width: 100,
+                              width: 90,
                             ),
                             Text(
                               (whichlist == 0)
@@ -930,7 +939,7 @@ class _SelectedFlightState extends State<SelectedFlight> {
                                             .split('T')[1],
                                 style: TextStyle(
                                     color: Colors.black,
-                                    fontWeight: FontWeight.w900,
+                                    fontWeight: FontWeight.w700,
                                     fontSize: 16),
                               ),
                               Text(
@@ -956,7 +965,7 @@ class _SelectedFlightState extends State<SelectedFlight> {
                                 style: TextStyle(
                                   color: Colors.grey,
                                   fontSize: 12,
-                                  fontWeight: FontWeight.w800,
+                                  fontWeight: FontWeight.w600,
                                 ),
                               )
                             ],
@@ -984,7 +993,7 @@ class _SelectedFlightState extends State<SelectedFlight> {
                                         : returnController.DepCityName2[index],
                                 style: TextStyle(
                                     color: Colors.black,
-                                    fontWeight: FontWeight.w900,
+                                    fontWeight: FontWeight.w700,
                                     fontSize: 16),
                               ),
                               Container(
@@ -1002,7 +1011,7 @@ class _SelectedFlightState extends State<SelectedFlight> {
                                   style: TextStyle(
                                     color: Colors.grey,
                                     fontSize: 12,
-                                    fontWeight: FontWeight.w800,
+                                    fontWeight: FontWeight.w600,
                                   ),
                                 ),
                               ),
@@ -1036,7 +1045,7 @@ class _SelectedFlightState extends State<SelectedFlight> {
                                   style: TextStyle(
                                     color: Colors.grey,
                                     fontSize: 12,
-                                    fontWeight: FontWeight.w800,
+                                    fontWeight: FontWeight.w600,
                                   ),
                                 ),
                               ),
@@ -1057,7 +1066,7 @@ class _SelectedFlightState extends State<SelectedFlight> {
                                         : returnController.ArrCityName2[index],
                                 style: TextStyle(
                                     color: Colors.black,
-                                    fontWeight: FontWeight.w900,
+                                    fontWeight: FontWeight.w700,
                                     fontSize: 16),
                               ),
                               Container(
@@ -1077,7 +1086,7 @@ class _SelectedFlightState extends State<SelectedFlight> {
                                   style: TextStyle(
                                     color: Colors.grey,
                                     fontSize: 12,
-                                    fontWeight: FontWeight.w800,
+                                    fontWeight: FontWeight.w600,
                                   ),
                                 ),
                               ),
@@ -1096,7 +1105,7 @@ class _SelectedFlightState extends State<SelectedFlight> {
                                   style: TextStyle(
                                     color: Colors.grey,
                                     fontSize: 12,
-                                    fontWeight: FontWeight.w800,
+                                    fontWeight: FontWeight.w600,
                                   ),
                                 ),
                               ),

@@ -64,6 +64,7 @@ class _SearchResultsState extends State<SearchResults> {
     return GetBuilder<OnewayController>(
       builder: (OnewayController) {
         return Scaffold(
+            backgroundColor: Colors.white,
             extendBody: true,
             appBar: travellingDetails(airportController),
             bottomNavigationBar:
@@ -73,7 +74,8 @@ class _SearchResultsState extends State<SearchResults> {
                     ? Container(
                         height: double.maxFinite,
                         alignment: Alignment.center,
-                        decoration: const BoxDecoration(),
+                        decoration: const BoxDecoration(
+                            color: Color.fromARGB(255, 255, 214, 1)),
                         width: double.maxFinite,
                         child: Column(
                           children: [
@@ -88,17 +90,17 @@ class _SearchResultsState extends State<SearchResults> {
                             ),
                             CircularProgressIndicator(
                               backgroundColor: Colors.transparent,
-                              color: Color.fromARGB(255, 255, 214, 1),
+                              color: Colors.white,
                             ),
                             SizedBox(
                               height: 40,
                             ),
                             Text(
-                              'Loading Your Ride Details...',
+                              'Loading Results',
                               style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w700),
+                                  color: Colors.white,
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.w600),
                             ),
                           ],
                         ))
@@ -187,7 +189,7 @@ class _SearchResultsState extends State<SearchResults> {
             height: 70,
             alignment: Alignment.center,
             decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 221, 221, 221),
+                color: const Color.fromARGB(255, 222, 222, 222),
                 borderRadius: BorderRadius.circular(10)),
             child: Row(
               children: [

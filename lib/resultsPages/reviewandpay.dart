@@ -79,6 +79,15 @@ class _ReviewandPayState extends State<ReviewandPay> {
         centerTitle: true,
         toolbarHeight: 70,
         backgroundColor: Color.fromARGB(255, 255, 214, 1),
+        automaticallyImplyLeading: false,
+        leading: GestureDetector(
+            onTap: () {
+              Get.back();
+            },
+            child: Icon(
+              CupertinoIcons.back,
+              color: Colors.white,
+            )),
         title: Text(
           'Review and Pay',
           style: TextStyle(
@@ -243,16 +252,19 @@ class _ReviewandPayState extends State<ReviewandPay> {
                                           ),
                                           Text(
                                             (onewayController.whichFare == 0)
-                                                ? ((onewayController.FirstIdentifierAdultTotal[
-                                                                widget.index] -
-                                                            onewayController
-                                                                    .FirstIdentifierAdultTax[
-                                                                widget.index]) *
-                                                        (airportController.Adults +
-                                                            airportController
-                                                                .Child))
-                                                    .toStringAsFixed(2)
-                                                : ((onewayController.SecondIdentifierAdultTotal[widget.index] -
+                                                ? ((onewayController.FirstIdentifierAdultTotal[widget.index] -
+                                                                onewayController
+                                                                        .FirstIdentifierAdultTax[
+                                                                    widget
+                                                                        .index]) *
+                                                            (airportController
+                                                                    .Adults +
+                                                                airportController
+                                                                    .Child))
+                                                        .toStringAsFixed(2) +
+                                                    ' Rs/-'
+                                                : ((onewayController.SecondIdentifierAdultTotal[widget
+                                                                    .index] -
                                                                 onewayController
                                                                         .SecondIdentifierAdultTax[
                                                                     widget
@@ -286,14 +298,14 @@ class _ReviewandPayState extends State<ReviewandPay> {
                                           ),
                                           Text(
                                             (onewayController.whichFare == 0)
-                                                ? (onewayController
-                                                                .FirstIdentifierAdultTax[
-                                                            widget.index] *
-                                                        (airportController
-                                                                .Adults +
-                                                            airportController
-                                                                .Child))
-                                                    .toStringAsFixed(2)
+                                                ? (onewayController.FirstIdentifierAdultTax[
+                                                                widget.index] *
+                                                            (airportController
+                                                                    .Adults +
+                                                                airportController
+                                                                    .Child))
+                                                        .toStringAsFixed(2) +
+                                                    ' Rs/-'
                                                 : (onewayController.SecondIdentifierAdultTax[
                                                                 widget.index] *
                                                             (airportController
@@ -478,7 +490,7 @@ class _ReviewandPayState extends State<ReviewandPay> {
                 children: [
                   Text(
                     airportController.fromAirportCode +
-                        ' - ' +
+                        ' ⇀ ' +
                         airportController.toAirportCode,
                     style: TextStyle(
                         color: Colors.black,

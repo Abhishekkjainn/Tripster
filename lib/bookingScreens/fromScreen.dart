@@ -253,6 +253,7 @@ class _SelectFromState extends State<SelectFrom> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: SelectFromAppbar(),
       body: Column(
         children: [

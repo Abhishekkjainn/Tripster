@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tripster/bookingScreens/Luggagepage.dart';
@@ -212,10 +213,19 @@ class _SeatMealLuggageState extends State<SeatMealLuggage> {
       toolbarHeight: 50,
       backgroundColor: const Color.fromARGB(255, 255, 214, 1),
       centerTitle: true,
+      automaticallyImplyLeading: false,
+      leading: GestureDetector(
+          onTap: () {
+            Get.back();
+          },
+          child: Icon(
+            CupertinoIcons.back,
+            color: Colors.white,
+          )),
       title: const Text(
         'Add Ons',
         style: TextStyle(
-            color: Colors.white, fontSize: 20, fontWeight: FontWeight.w900),
+            color: Colors.white, fontSize: 20, fontWeight: FontWeight.w700),
       ),
     );
   }

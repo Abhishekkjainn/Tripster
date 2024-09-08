@@ -931,7 +931,7 @@ class _BaggagePageState extends State<BaggagePage> {
                   children: [
                     Text(
                       airportController.fromAirportCode +
-                          " - " +
+                          " ⇀ " +
                           airportController.toAirportCode,
                       style: TextStyle(
                           color: Colors.black,
@@ -956,7 +956,7 @@ class _BaggagePageState extends State<BaggagePage> {
                           onewayController.Stops[widget.index].toString() +
                           " Stops",
                       style: TextStyle(
-                          color: Colors.black,
+                          color: Colors.grey,
                           fontSize: 10,
                           fontWeight: FontWeight.w700),
                     ),
@@ -975,10 +975,19 @@ class _BaggagePageState extends State<BaggagePage> {
       toolbarHeight: 50,
       backgroundColor: const Color.fromARGB(255, 255, 214, 1),
       centerTitle: true,
+      automaticallyImplyLeading: false,
+      leading: GestureDetector(
+          onTap: () {
+            Get.back();
+          },
+          child: Icon(
+            CupertinoIcons.back,
+            color: Colors.white,
+          )),
       title: const Text(
         'Flight Details',
         style: TextStyle(
-            color: Colors.white, fontSize: 20, fontWeight: FontWeight.w900),
+            color: Colors.white, fontSize: 20, fontWeight: FontWeight.w700),
       ),
     );
   }

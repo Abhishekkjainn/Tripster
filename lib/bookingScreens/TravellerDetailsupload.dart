@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tripster/controllers/airportcontroller.dart';
 import 'package:tripster/controllers/passengerController.dart';
@@ -19,6 +20,7 @@ class _TravellerDetailsState extends State<TravellerDetails> {
   ReturnController returnController = Get.find();
   PassengerController passengerController = Get.find();
   TextEditingController adult1name = TextEditingController();
+  TextEditingController adult1lastname = TextEditingController();
   TextEditingController adult1email = TextEditingController();
   TextEditingController adult1phone = TextEditingController();
   TextEditingController adult1gender = TextEditingController();
@@ -28,6 +30,7 @@ class _TravellerDetailsState extends State<TravellerDetails> {
   TextEditingController gstphn = TextEditingController();
   TextEditingController gstaddress = TextEditingController();
   List<TextEditingController> nameControllers = [];
+  List<TextEditingController> lastnameControllers = [];
   List<TextEditingController> genderControllers = [];
   List<String?> genderList = [];
   String Gender1 = "";
@@ -44,6 +47,7 @@ class _TravellerDetailsState extends State<TravellerDetails> {
         List<GlobalKey<FormState>?>.filled(airportController.Adults, null);
     for (int i = 0; i < airportController.Adults; i++) {
       nameControllers.add(TextEditingController());
+      lastnameControllers.add(TextEditingController());
       genderControllers.add(TextEditingController());
     }
   }
@@ -74,6 +78,15 @@ class _TravellerDetailsState extends State<TravellerDetails> {
       appBar: AppBar(
         centerTitle: true,
         toolbarHeight: 70,
+        automaticallyImplyLeading: false,
+        leading: GestureDetector(
+            onTap: () {
+              Get.back();
+            },
+            child: Icon(
+              CupertinoIcons.back,
+              color: Colors.white,
+            )),
         backgroundColor: Color.fromARGB(255, 255, 214, 1),
         title: Text(
           'Adult Traveller Details',
@@ -117,95 +130,140 @@ class _TravellerDetailsState extends State<TravellerDetails> {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 0, bottom: 20),
-                        child: Row(
+                        child: Column(
                           children: [
-                            Expanded(
-                                flex: 2,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(3.0),
-                                  child: DropdownButtonFormField<String>(
-                                    value: null,
-                                    items:
-                                        ['Mr', 'Mrs', 'Ms'].map((String value) {
-                                      return DropdownMenuItem<String>(
-                                        value: value,
-                                        child: Text(value),
-                                      );
-                                    }).toList(),
-                                    onChanged: (newValue) {
-                                      genderList[index] = newValue;
-                                    },
-                                    decoration: InputDecoration(
-                                        hintText: 'Title',
-                                        hintStyle: TextStyle(
-                                            color: Colors.grey,
+                            Row(
+                              children: [
+                                Expanded(
+                                    flex: 2,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(3.0),
+                                      child: DropdownButtonFormField<String>(
+                                        value: null,
+                                        items: ['Mr', 'Mrs', 'Ms']
+                                            .map((String value) {
+                                          return DropdownMenuItem<String>(
+                                            value: value,
+                                            child: Text(value),
+                                          );
+                                        }).toList(),
+                                        onChanged: (newValue) {
+                                          genderList[index] = newValue;
+                                        },
+                                        decoration: InputDecoration(
+                                            hintText: 'Title',
+                                            hintStyle: TextStyle(
+                                                color: Colors.grey,
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w600),
+                                            focusedBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                    color: Colors.blue,
+                                                    width: 2),
+                                                borderRadius:
+                                                    BorderRadius.circular(5)),
+                                            enabled: true,
+                                            enabledBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                    color: Colors.black,
+                                                    width: 1),
+                                                borderRadius:
+                                                    BorderRadius.circular(5)),
+                                            border: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                    color: Colors.blue,
+                                                    width: 1),
+                                                borderRadius:
+                                                    BorderRadius.circular(10))),
+                                        style: TextStyle(
+                                            color: Colors.black,
                                             fontSize: 14,
                                             fontWeight: FontWeight.w600),
-                                        focusedBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color: Colors.blue, width: 2),
-                                            borderRadius:
-                                                BorderRadius.circular(5)),
-                                        enabled: true,
-                                        enabledBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color: Colors.black, width: 1),
-                                            borderRadius:
-                                                BorderRadius.circular(5)),
-                                        border: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color: Colors.blue, width: 1),
-                                            borderRadius:
-                                                BorderRadius.circular(10))),
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w600),
-                                  ),
-                                )),
-                            Expanded(
-                                flex: 5,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(3.0),
-                                  child: TextFormField(
-                                    controller: nameControllers[index],
-                                    validator: (value) {
-                                      if (value == null || value.isEmpty) {
-                                        return 'Please enter phone number';
-                                      }
-                                      if (value.length != 10) {
-                                        return 'Phone number must be 10 digits';
-                                      }
-                                      return null;
-                                    },
-                                    decoration: InputDecoration(
-                                        hintText: 'Enter Full Name',
-                                        hintStyle: TextStyle(
-                                            color: Colors.grey,
+                                      ),
+                                    )),
+                                Expanded(
+                                    flex: 5,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(3.0),
+                                      child: TextFormField(
+                                        controller: nameControllers[index],
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            return 'Please enter First Name';
+                                          }
+
+                                          return null;
+                                        },
+                                        decoration: InputDecoration(
+                                            hintText: 'Enter First Name',
+                                            hintStyle: TextStyle(
+                                                color: Colors.grey,
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w600),
+                                            focusedBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                    color: Colors.blue,
+                                                    width: 2),
+                                                borderRadius:
+                                                    BorderRadius.circular(5)),
+                                            enabled: true,
+                                            enabledBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                    color: Colors.black,
+                                                    width: 1),
+                                                borderRadius:
+                                                    BorderRadius.circular(5)),
+                                            border: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                    color: Colors.blue,
+                                                    width: 1),
+                                                borderRadius:
+                                                    BorderRadius.circular(10))),
+                                        style: TextStyle(
+                                            color: Colors.black,
                                             fontSize: 14,
                                             fontWeight: FontWeight.w600),
-                                        focusedBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color: Colors.blue, width: 2),
-                                            borderRadius:
-                                                BorderRadius.circular(5)),
-                                        enabled: true,
-                                        enabledBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color: Colors.black, width: 1),
-                                            borderRadius:
-                                                BorderRadius.circular(5)),
-                                        border: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color: Colors.blue, width: 1),
-                                            borderRadius:
-                                                BorderRadius.circular(10))),
-                                    style: TextStyle(
-                                        color: Colors.black,
+                                      ),
+                                    )),
+                              ],
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(3.0),
+                              child: TextFormField(
+                                controller: lastnameControllers[index],
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter last Name';
+                                  }
+
+                                  return null;
+                                },
+                                decoration: InputDecoration(
+                                    hintText: 'Enter Last Name',
+                                    hintStyle: TextStyle(
+                                        color: Colors.grey,
                                         fontSize: 14,
                                         fontWeight: FontWeight.w600),
-                                  ),
-                                )),
+                                    focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Colors.blue, width: 2),
+                                        borderRadius: BorderRadius.circular(5)),
+                                    enabled: true,
+                                    enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Colors.black, width: 1),
+                                        borderRadius: BorderRadius.circular(5)),
+                                    border: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Colors.blue, width: 1),
+                                        borderRadius:
+                                            BorderRadius.circular(10))),
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -222,6 +280,7 @@ class _TravellerDetailsState extends State<TravellerDetails> {
                   passengerController.AdultPassengerphone.clear();
                   passengerController.AdultPassengeremail.clear();
                   passengerController.AdultPassengerGender.clear();
+                  passengerController.AdultPassengerlastname.clear();
                   passengerController.gstaddress = "";
                   passengerController.gstemail = "";
                   passengerController.gstname = "";
@@ -231,6 +290,8 @@ class _TravellerDetailsState extends State<TravellerDetails> {
                   if (_formKey.currentState?.validate() ?? false) {
                     // Form is valid, proceed with adding details
                     passengerController.AdultPassengername.add(adult1name.text);
+                    passengerController.AdultPassengerlastname.add(
+                        adult1lastname.text);
                     passengerController.AdultPassengerphone.add(
                         adult1phone.text);
                     passengerController.AdultPassengeremail.add(
@@ -240,6 +301,7 @@ class _TravellerDetailsState extends State<TravellerDetails> {
                     adult1email.text = '';
                     adult1phone.text = '';
                     adult1name.text = '';
+                    adult1lastname.text = '';
                     passengerController.gstaddress = gstaddress.text;
                     passengerController.gstemail = gstemail.text;
                     passengerController.gstname = gstregname.text;
@@ -249,18 +311,29 @@ class _TravellerDetailsState extends State<TravellerDetails> {
                     for (int i = 0; i < airportController.Adults - 1; i++) {
                       passengerController.AdultPassengername.add(
                           nameControllers[i].text);
+                      passengerController.AdultPassengerlastname.add(
+                          lastnameControllers[i].text);
                       passengerController.AdultPassengerGender.add(
                           genderList[i]);
                     }
 
                     for (int i = 0; i < airportController.Adults; i++) {
                       nameControllers[i].text = '';
+                      lastnameControllers[i].text = '';
                       genderList[i] = null;
                     }
                     Get.back();
                   } else {
                     Get.snackbar('Error',
-                        'Please fill all details correctly before proceeding.');
+                        'Please fill all details correctly before proceeding.',
+                        colorText: Colors.white,
+                        backgroundColor: Colors.redAccent,
+                        isDismissible: true,
+                        shouldIconPulse: false,
+                        icon: Icon(
+                          CupertinoIcons.xmark_circle_fill,
+                          color: Colors.white,
+                        ));
                   }
                   if (onewayController.isGst) {
                     if (_formKey2.currentState?.validate() ?? false) {
@@ -276,11 +349,20 @@ class _TravellerDetailsState extends State<TravellerDetails> {
                       gstaddress.text = '';
                     } else {
                       Get.snackbar('Error',
-                          'Please fill all GST Details Correctly Before Posting');
+                          'Please fill all GST Details Correctly Before Posting',
+                          colorText: Colors.white,
+                          backgroundColor: Colors.redAccent,
+                          isDismissible: true,
+                          shouldIconPulse: false,
+                          icon: Icon(
+                            CupertinoIcons.xmark_circle_fill,
+                            color: Colors.white,
+                          ));
                       passengerController.AdultPassengername.clear();
                       passengerController.AdultPassengerphone.clear();
                       passengerController.AdultPassengeremail.clear();
                       passengerController.AdultPassengerGender.clear();
+                      passengerController.AdultPassengerlastname.clear();
                       passengerController.gstaddress = "";
                       passengerController.gstemail = "";
                       passengerController.gstname = "";
@@ -633,12 +715,12 @@ class _TravellerDetailsState extends State<TravellerDetails> {
                                 keyboardType: TextInputType.name,
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
-                                    return 'Please enter Full Name';
+                                    return 'Please enter First Name';
                                   }
                                   return null;
                                 },
                                 decoration: InputDecoration(
-                                    hintText: 'Enter Full Name',
+                                    hintText: 'Enter First Name',
                                     hintStyle: TextStyle(
                                         color: Colors.grey,
                                         fontSize: 14,
@@ -664,6 +746,42 @@ class _TravellerDetailsState extends State<TravellerDetails> {
                               ),
                             )),
                       ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(3.0),
+                    child: TextFormField(
+                      controller: adult1lastname,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter Last Name';
+                        }
+
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                          hintText: 'Enter Last Name',
+                          hintStyle: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600),
+                          focusedBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.blue, width: 2),
+                              borderRadius: BorderRadius.circular(5)),
+                          enabled: true,
+                          enabledBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.black, width: 1),
+                              borderRadius: BorderRadius.circular(5)),
+                          border: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.blue, width: 1),
+                              borderRadius: BorderRadius.circular(10))),
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600),
                     ),
                   ),
                   Row(

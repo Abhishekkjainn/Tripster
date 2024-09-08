@@ -23,6 +23,7 @@ class BlogScreen extends StatelessWidget {
     return Scaffold(
       extendBody: true,
       extendBodyBehindAppBar: true,
+      backgroundColor: Colors.white,
       appBar: AppBar(
         // backgroundColor: Color.fromARGB(255, 255, 214, 1),
         backgroundColor: const Color.fromARGB(50, 0, 0, 0),

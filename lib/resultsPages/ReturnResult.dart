@@ -24,6 +24,7 @@ class _ReturnResultsState extends State<ReturnResults> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: Appbar1(),
       body: GetBuilder<ReturnController>(
         builder: (ReturnController) {
