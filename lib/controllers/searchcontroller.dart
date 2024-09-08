@@ -38,6 +38,7 @@ class OnewayController extends GetxController {
   List isReturn = [];
   List isNextDay = [];
   List AdultPrices = [];
+  List ChildPrices = [];
   List AdultBasePrices = [];
   List InfantBasePrices = [];
   List AdultTaxPrices = [];
@@ -84,6 +85,7 @@ class OnewayController extends GetxController {
     isReturn.clear();
     isNextDay.clear();
     AdultPrices.clear();
+    ChildPrices.clear();
     AdultBasePrices.clear();
     AdultTaxPrices.clear();
     SeatsRemaining.clear();
@@ -158,6 +160,8 @@ class OnewayController extends GetxController {
           jsonData['searchResult']['tripInfos']['ONWARD'][i]['sI'][0]['iand']);
       AdultPrices.add(jsonData['searchResult']['tripInfos']['ONWARD'][i]
           ['totalPriceList'][0]['fd']['ADULT']['fC']['TF']);
+      ChildPrices.add(jsonData['searchResult']['tripInfos']['ONWARD'][i]
+          ['totalPriceList'][0]['fd']['CHILD']['fC']['TF']);
       AdultTaxPrices.add(jsonData['searchResult']['tripInfos']['ONWARD'][i]
           ['totalPriceList'][0]['fd']['ADULT']['fC']['TAF']);
       SeatsRemaining.add(jsonData['searchResult']['tripInfos']['ONWARD'][i]
@@ -176,6 +180,7 @@ class OnewayController extends GetxController {
           ['ONWARD'][i]['totalPriceList'][0]['fd']['ADULT']['fC']['TAF']);
       FirstIdentifierAdultrefundable.add(jsonData['searchResult']['tripInfos']
           ['ONWARD'][i]['totalPriceList'][0]['fd']['ADULT']['rT']);
+
       // FirstIdentifierAdultBaggage.add(jsonData[])
       if (jsonData['searchResult']['tripInfos']['ONWARD'][i]['totalPriceList']
               .length >
@@ -916,6 +921,4 @@ class OnewayController extends GetxController {
   List selectedSeatIndex = [];
   num extraSeatAmount = 0;
   bool isGst = false;
-
-  postData() {}
 }

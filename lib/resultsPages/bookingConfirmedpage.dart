@@ -10,6 +10,7 @@ import 'package:tripster/controllers/returnSearch.dart';
 import 'package:tripster/controllers/searchcontroller.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:tripster/home.dart';
+import 'package:tripster/resultsPages/errorPage.dart';
 
 class BookingConfirmed extends StatefulWidget {
   final int index;
@@ -26,13 +27,12 @@ class _BookingConfirmedState extends State<BookingConfirmed> {
   ReturnController returnController = Get.find();
   PassengerController passengerController = Get.find();
   Bookingcontroller bookingController = Get.find();
-  final GlobalKey<State<StatefulWidget>> _printKey = GlobalKey();
 
   Future<void> postTrip() async {
     try {
       // Construct the document name based on DepAirportCode and ArrAirportCode
       String docName =
-          'jainabhishek1904@gmail.com${bookingController.AirlinePNR[0]}';
+          'jainabhishek1904@gmail.com${bookingController.CreatedOn}';
 
       // Reference to the 'trips' collection in Firestore
       CollectionReference tripsCollection =
@@ -42,7 +42,7 @@ class _BookingConfirmedState extends State<BookingConfirmed> {
       Map<String, dynamic> tripData = {
         'DepAirportCode': bookingController.DepAirportCode,
         'ArrAirportCode': bookingController.ArrAirportCode,
-        'OnewayDate': bookingController.OnewayDate,
+        'OnewayDate': bookingController.DepDate,
         'Adults': bookingController.Adults,
         'Child': bookingController.Child,
         'SelectedCabin': bookingController.SelectedCabin,
@@ -107,307 +107,438 @@ class _BookingConfirmedState extends State<BookingConfirmed> {
   @override
   void initState() {
     super.initState();
-    postTrip();
+    if (bookingController.isBooked == true) {
+      postTrip();
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return (isPosted == 0)
-        ? Scaffold(
-            backgroundColor: Colors.white,
-            appBar: AppBar(
-              centerTitle: true,
-              toolbarHeight: 70,
-              automaticallyImplyLeading: false,
-              leading: GestureDetector(
-                  onTap: () {
-                    Get.offAll(Home(), transition: Transition.rightToLeft);
-                  },
-                  child: Icon(
-                    CupertinoIcons.back,
-                    color: Colors.white,
-                  )),
-              backgroundColor: Color.fromARGB(255, 255, 214, 1),
-              title: Text(
-                'Congratulations',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 22,
-                    fontWeight: FontWeight.w600),
-              ),
-            ),
-            body: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      width: double.maxFinite,
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.grey, width: 1),
-                          borderRadius: BorderRadius.circular(10)),
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Image(
-                                  image: AssetImage(
-                                      'assets/images/bookingdone.png'),
-                                  width: 60,
-                                ),
-                                SizedBox(
-                                  width: 15,
-                                ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Booking Confirmed!',
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w600),
-                                    ),
-                                    Text(
-                                      'ID: ' +
-                                          onewayController.BookingId[0]
-                                              .toString(),
-                                      style: TextStyle(
-                                          color: Colors.grey,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w600),
-                                    )
-                                  ],
-                                )
-                              ],
+    return GetBuilder<Bookingcontroller>(
+      builder: (Bookingcontroller) {
+        return (bookingController.isBooked == false)
+            ? Scaffold(
+                backgroundColor: Colors.white,
+                bottomNavigationBar: Container(
+                  child: Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: GestureDetector(
+                      onTap: () {
+                        Get.offAll(() => Home(),
+                            transition: Transition.cupertino);
+                      },
+                      child: Container(
+                        height: 50,
+                        width: double.maxFinite,
+                        decoration: BoxDecoration(
+                            color: Colors.blue,
+                            borderRadius: BorderRadius.circular(10)),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.home_filled,
+                              color: Colors.white,
                             ),
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  // createPdf();
-                                  // print('Done');
-
-                                  Get.to(() => ETicketPage());
-                                },
-                                child: Container(
-                                  width: 140,
-                                  height: 40,
-                                  decoration: BoxDecoration(
-                                      color: Color.fromARGB(255, 255, 214, 1),
-                                      borderRadius: BorderRadius.circular(3)),
-                                  child: Row(
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              'Go To Home',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                appBar: AppBar(
+                  centerTitle: true,
+                  toolbarHeight: 70,
+                  automaticallyImplyLeading: false,
+                  leading: (bookingController.isBooked == true)
+                      ? GestureDetector(
+                          onTap: () {
+                            Get.offAll(Home(),
+                                transition: Transition.rightToLeft);
+                          },
+                          child: Icon(
+                            CupertinoIcons.back,
+                            color: Colors.white,
+                          ))
+                      : Container(),
+                  backgroundColor: Color.fromARGB(255, 255, 214, 1),
+                  title: Text(
+                    'Booking Failed',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 22,
+                        fontWeight: FontWeight.w600),
+                  ),
+                ),
+                body: Expanded(
+                  child: Container(
+                    alignment: Alignment.center,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Image(
+                            image:
+                                AssetImage('assets/images/bookingfailed.png')),
+                        Text(
+                          'Your Booking had Failed.',
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600),
+                        ),
+                        SizedBox(
+                          height: 8,
+                        ),
+                        Text(
+                          'Please Contact Tripster Support for Further Assistance',
+                          style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              )
+            : (isPosted == 0)
+                ? Scaffold(
+                    backgroundColor: Colors.white,
+                    appBar: AppBar(
+                      centerTitle: true,
+                      toolbarHeight: 70,
+                      automaticallyImplyLeading: false,
+                      leading: GestureDetector(
+                          onTap: () {
+                            Get.offAll(Home(),
+                                transition: Transition.rightToLeft);
+                          },
+                          child: Icon(
+                            CupertinoIcons.back,
+                            color: Colors.white,
+                          )),
+                      backgroundColor: Color.fromARGB(255, 255, 214, 1),
+                      title: Text(
+                        'Congratulations',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 22,
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                    body: SingleChildScrollView(
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: double.maxFinite,
+                              decoration: BoxDecoration(
+                                  border:
+                                      Border.all(color: Colors.grey, width: 1),
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Column(
+                                children: [
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 20),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Image(
+                                          image: AssetImage(
+                                              'assets/images/bookingdone.png'),
+                                          width: 60,
+                                        ),
+                                        SizedBox(
+                                          width: 15,
+                                        ),
+                                        Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              'Booking Confirmed!',
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.w600),
+                                            ),
+                                            Text(
+                                              'ID: ' +
+                                                  onewayController.BookingId[0]
+                                                      .toString(),
+                                              style: TextStyle(
+                                                  color: Colors.grey,
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w600),
+                                            )
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Icon(
-                                        CupertinoIcons.cloud_download_fill,
-                                        color: Colors.black,
-                                        size: 15,
+                                      GestureDetector(
+                                        onTap: () async {
+                                          Get.dialog(CircularProgressIndicator(
+                                            color: Colors.amber,
+                                            backgroundColor: Colors.transparent,
+                                          ));
+                                          await airportController
+                                              .callonewaybookingDetails(
+                                                  onewayController.BookingId[0]
+                                                      .toString());
+
+                                          (bookingController.isErrordetails ==
+                                                  0)
+                                              ? Get.to(() => ETicketPage())
+                                              : Get.to(() => Errorpage());
+                                        },
+                                        child: Container(
+                                          width: 140,
+                                          height: 40,
+                                          decoration: BoxDecoration(
+                                              color: Color.fromARGB(
+                                                  255, 255, 214, 1),
+                                              borderRadius:
+                                                  BorderRadius.circular(3)),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Icon(
+                                                CupertinoIcons
+                                                    .cloud_download_fill,
+                                                color: Colors.black,
+                                                size: 15,
+                                              ),
+                                              SizedBox(
+                                                width: 8,
+                                              ),
+                                              Text(
+                                                'Download E-Ticket',
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 12,
+                                                    fontWeight:
+                                                        FontWeight.w600),
+                                              )
+                                            ],
+                                          ),
+                                        ),
                                       ),
-                                      SizedBox(
-                                        width: 8,
-                                      ),
-                                      Text(
-                                        'Download E-Ticket',
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w600),
-                                      )
                                     ],
                                   ),
-                                ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                        ],
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            AllTravelDetailsCard(widget.index, 0),
+                            SizedBox(
+                              height: 15,
+                            ),
+                            Container(
+                              width: double.maxFinite,
+                              height: 150,
+                              decoration: BoxDecoration(
+                                  border:
+                                      Border.all(color: Colors.grey, width: 1),
+                                  borderRadius: BorderRadius.circular(8)),
+                              child: Column(
+                                children: [
+                                  Expanded(
+                                      flex: 2,
+                                      child: Container(
+                                        child: Row(
+                                          children: [
+                                            SizedBox(
+                                              width: 15,
+                                            ),
+                                            Image(
+                                              image: AssetImage(
+                                                  'assets/images/thumbs.png'),
+                                              width: 60,
+                                            ),
+                                            SizedBox(
+                                              width: 15,
+                                            ),
+                                            Expanded(
+                                                child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  'Thanks For Booking with Tripster',
+                                                  style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontSize: 14,
+                                                      fontWeight:
+                                                          FontWeight.w600),
+                                                ),
+                                                SizedBox(
+                                                  height: 3,
+                                                ),
+                                                Text(
+                                                  'For any Flight related Support you can contact us and get the help needed',
+                                                  textAlign: TextAlign.left,
+                                                  style: TextStyle(
+                                                      color: Colors.grey,
+                                                      fontSize: 10,
+                                                      fontWeight:
+                                                          FontWeight.w600),
+                                                ),
+                                              ],
+                                            )),
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                          ],
+                                        ),
+                                      )),
+                                  Expanded(
+                                      flex: 1,
+                                      child: Container(
+                                        width: double.maxFinite,
+                                        decoration: BoxDecoration(
+                                          border: BorderDirectional(
+                                              top: BorderSide(
+                                                  color: Colors.grey,
+                                                  width: 1)),
+                                        ),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            SizedBox(
+                                              width: 5,
+                                            ),
+                                            Row(
+                                              children: [
+                                                Image(
+                                                  image: AssetImage(
+                                                      'assets/images/easy.png'),
+                                                  width: 15,
+                                                ),
+                                                SizedBox(
+                                                  width: 3,
+                                                ),
+                                                Text(
+                                                  'Easy Bookings',
+                                                  style: TextStyle(
+                                                      color: Colors.grey,
+                                                      fontSize: 10,
+                                                      fontWeight:
+                                                          FontWeight.w600),
+                                                )
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                Image(
+                                                  image: AssetImage(
+                                                      'assets/images/discount.png'),
+                                                  width: 15,
+                                                ),
+                                                SizedBox(
+                                                  width: 3,
+                                                ),
+                                                Text(
+                                                  'Cheaper Prices',
+                                                  style: TextStyle(
+                                                      color: Colors.grey,
+                                                      fontSize: 10,
+                                                      fontWeight:
+                                                          FontWeight.w600),
+                                                )
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                Image(
+                                                  image: AssetImage(
+                                                      'assets/images/easy.png'),
+                                                  width: 15,
+                                                ),
+                                                SizedBox(
+                                                  width: 3,
+                                                ),
+                                                Text(
+                                                  'Easy Cancellation',
+                                                  style: TextStyle(
+                                                      color: Colors.grey,
+                                                      fontSize: 10,
+                                                      fontWeight:
+                                                          FontWeight.w600),
+                                                )
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              width: 5,
+                                            ),
+                                          ],
+                                        ),
+                                      ))
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    AllTravelDetailsCard(widget.index, 0),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Container(
+                  )
+                : Scaffold(
+                    backgroundColor: Colors.white,
+                    body: Container(
                       width: double.maxFinite,
-                      height: 150,
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.grey, width: 1),
-                          borderRadius: BorderRadius.circular(8)),
-                      child: Column(
-                        children: [
-                          Expanded(
-                              flex: 2,
-                              child: Container(
-                                child: Row(
-                                  children: [
-                                    SizedBox(
-                                      width: 15,
-                                    ),
-                                    Image(
-                                      image: AssetImage(
-                                          'assets/images/thumbs.png'),
-                                      width: 60,
-                                    ),
-                                    SizedBox(
-                                      width: 15,
-                                    ),
-                                    Expanded(
-                                        child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          'Thanks For Booking with Tripster',
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w600),
-                                        ),
-                                        SizedBox(
-                                          height: 3,
-                                        ),
-                                        Text(
-                                          'For any Flight related Support you can contact us and get the help needed',
-                                          textAlign: TextAlign.left,
-                                          style: TextStyle(
-                                              color: Colors.grey,
-                                              fontSize: 10,
-                                              fontWeight: FontWeight.w600),
-                                        ),
-                                      ],
-                                    )),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                  ],
-                                ),
-                              )),
-                          Expanded(
-                              flex: 1,
-                              child: Container(
-                                width: double.maxFinite,
-                                decoration: BoxDecoration(
-                                  border: BorderDirectional(
-                                      top: BorderSide(
-                                          color: Colors.grey, width: 1)),
-                                ),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    SizedBox(
-                                      width: 5,
-                                    ),
-                                    Row(
-                                      children: [
-                                        Image(
-                                          image: AssetImage(
-                                              'assets/images/easy.png'),
-                                          width: 15,
-                                        ),
-                                        SizedBox(
-                                          width: 3,
-                                        ),
-                                        Text(
-                                          'Easy Bookings',
-                                          style: TextStyle(
-                                              color: Colors.grey,
-                                              fontSize: 10,
-                                              fontWeight: FontWeight.w600),
-                                        )
-                                      ],
-                                    ),
-                                    Row(
-                                      children: [
-                                        Image(
-                                          image: AssetImage(
-                                              'assets/images/discount.png'),
-                                          width: 15,
-                                        ),
-                                        SizedBox(
-                                          width: 3,
-                                        ),
-                                        Text(
-                                          'Cheaper Prices',
-                                          style: TextStyle(
-                                              color: Colors.grey,
-                                              fontSize: 10,
-                                              fontWeight: FontWeight.w600),
-                                        )
-                                      ],
-                                    ),
-                                    Row(
-                                      children: [
-                                        Image(
-                                          image: AssetImage(
-                                              'assets/images/easy.png'),
-                                          width: 15,
-                                        ),
-                                        SizedBox(
-                                          width: 3,
-                                        ),
-                                        Text(
-                                          'Easy Cancellation',
-                                          style: TextStyle(
-                                              color: Colors.grey,
-                                              fontSize: 10,
-                                              fontWeight: FontWeight.w600),
-                                        )
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      width: 5,
-                                    ),
-                                  ],
-                                ),
-                              ))
-                        ],
+                      alignment: Alignment.center,
+                      color: Colors.amber,
+                      height: MediaQuery.of(context).size.height,
+                      child: Container(
+                        width: 50,
+                        height: 50,
+                        child: CircularProgressIndicator(
+                          color: Colors.white,
+                        ),
                       ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-          )
-        : Scaffold(
-            backgroundColor: Colors.white,
-            body: Container(
-              width: double.maxFinite,
-              alignment: Alignment.center,
-              color: Colors.amber,
-              height: MediaQuery.of(context).size.height,
-              child: Container(
-                width: 50,
-                height: 50,
-                child: CircularProgressIndicator(
-                  color: Colors.white,
-                ),
-              ),
-            ),
-          );
+                    ),
+                  );
+      },
+    );
   }
 
   Padding AllTravelDetailsCard(index, whichlist) {

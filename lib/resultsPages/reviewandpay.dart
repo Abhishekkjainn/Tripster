@@ -26,89 +26,109 @@ class _ReviewandPayState extends State<ReviewandPay> {
   @override
   Widget build(BuildContext context) {
     // (onewayController.whichFare == 0)
-    //     ? (bookingcontroller.tf = (onewayController.AdultPrices[widget.index]))
-    //     : (bookingcontroller.tf =
-    //         (onewayController.FirstIdentifierAdultTotal[widget.index]));
-    return Scaffold(
-      backgroundColor: Colors.white,
-      bottomNavigationBar: Container(
-        width: double.maxFinite,
-        height: 80,
-        decoration: BoxDecoration(color: Colors.white),
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: GestureDetector(
-            onTap: () {
-              // airportController
-              //     .callonewaybooking(onewayController.BookingId[0]);
-              Get.off(() => BookingConfirmed(index: widget.index),
-                  transition: Transition.rightToLeft);
-            },
-            child: Container(
-              alignment: Alignment.center,
-              width: double.maxFinite,
-              height: 60,
-              decoration: BoxDecoration(
-                  color: Colors.blue, borderRadius: BorderRadius.circular(10)),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Icon(
-                    CupertinoIcons.lock_fill,
-                    color: Colors.white,
-                    size: 25,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    'Pay',
-                    style: TextStyle(
+    bookingcontroller.tf = (onewayController.AdultPrices[widget.index]);
+    // : (bookingcontroller.tf =
+    //     (onewayController.FirstIdentifierAdultTotal[widget.index]));
+    return GetBuilder<Bookingcontroller>(
+      builder: (Bookingcontroller) {
+        return Scaffold(
+          backgroundColor: Colors.white,
+          bottomNavigationBar: Container(
+            width: double.maxFinite,
+            height: 80,
+            decoration: BoxDecoration(color: Colors.white),
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: GestureDetector(
+                onTap: () async {
+                  Get.dialog(
+                    Center(
+                      child: CircularProgressIndicator(
+                        backgroundColor: Colors.transparent,
+                        color: Colors.amber,
+                      ),
+                    ),
+                    barrierDismissible:
+                        false, // Prevent closing the dialog by tapping outside
+                  );
+                  await airportController.callonewaybooking(
+                      onewayController.BookingId[0].toString(),
+                      bookingcontroller.tf,
+                      onewayController.ChildPrices[widget.index]);
+
+                  Get.off(() => BookingConfirmed(index: widget.index),
+                      transition: Transition.rightToLeft);
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  width: double.maxFinite,
+                  height: 60,
+                  decoration: BoxDecoration(
+                      color: Colors.blue,
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Icon(
+                        CupertinoIcons.lock_fill,
                         color: Colors.white,
-                        fontSize: 22,
-                        fontWeight: FontWeight.w600),
-                  )
+                        size: 25,
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        'Pay',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 22,
+                            fontWeight: FontWeight.w600),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+          appBar: AppBar(
+            centerTitle: true,
+            toolbarHeight: 70,
+            backgroundColor: Color.fromARGB(255, 255, 214, 1),
+            automaticallyImplyLeading: false,
+            leading: GestureDetector(
+                onTap: () {
+                  Get.back();
+                },
+                child: Icon(
+                  CupertinoIcons.back,
+                  color: Colors.white,
+                )),
+            title: Text(
+              'Review and Pay',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 22,
+                  fontWeight: FontWeight.w600),
+            ),
+          ),
+          body: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ReviewCard(context),
+                  SizedBox(
+                    height: 20,
+                  ),
                 ],
               ),
             ),
           ),
-        ),
-      ),
-      appBar: AppBar(
-        centerTitle: true,
-        toolbarHeight: 70,
-        backgroundColor: Color.fromARGB(255, 255, 214, 1),
-        automaticallyImplyLeading: false,
-        leading: GestureDetector(
-            onTap: () {
-              Get.back();
-            },
-            child: Icon(
-              CupertinoIcons.back,
-              color: Colors.white,
-            )),
-        title: Text(
-          'Review and Pay',
-          style: TextStyle(
-              color: Colors.white, fontSize: 22, fontWeight: FontWeight.w600),
-        ),
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ReviewCard(context),
-              SizedBox(
-                height: 20,
-              ),
-            ],
-          ),
-        ),
-      ),
+        );
+      },
     );
   }
 

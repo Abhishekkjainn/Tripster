@@ -757,7 +757,7 @@ class _ETicketPageState extends State<ETicketPage> {
                       Padding(
                         padding: const EdgeInsets.only(left: 0, right: 2),
                         child: Text(
-                          formatDate(bookingController.OnewayDate.toString()),
+                          formatDate(bookingController.DepDate.toString()),
                           style: TextStyle(
                               color: Colors.grey,
                               fontSize: 10,

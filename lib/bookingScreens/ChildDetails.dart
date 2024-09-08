@@ -19,6 +19,7 @@ class _ChildDetailsState extends State<ChildDetails> {
   ReturnController returnController = Get.find();
   PassengerController passengerController = Get.find();
   List<TextEditingController> nameControllers = [];
+  List<TextEditingController> lastnameControllers = [];
 
   final _formKey = GlobalKey<FormState>();
 
@@ -28,6 +29,7 @@ class _ChildDetailsState extends State<ChildDetails> {
     // Initialize controllers based on the number of children
     for (int i = 0; i < airportController.Child; i++) {
       nameControllers.add(TextEditingController());
+      lastnameControllers.add(TextEditingController());
     }
   }
 
@@ -89,47 +91,82 @@ class _ChildDetailsState extends State<ChildDetails> {
                         ),
                         Padding(
                           padding: const EdgeInsets.only(top: 0, bottom: 20),
-                          child: Row(
+                          child: Column(
                             children: [
-                              Expanded(
-                                flex: 5,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(3.0),
-                                  child: TextFormField(
-                                    controller: nameControllers[index],
-                                    decoration: InputDecoration(
-                                        hintText: 'Enter Full Name',
-                                        hintStyle: const TextStyle(
-                                            color: Colors.grey,
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w600),
-                                        focusedBorder: OutlineInputBorder(
-                                            borderSide: const BorderSide(
-                                                color: Colors.blue, width: 2),
-                                            borderRadius:
-                                                BorderRadius.circular(5)),
-                                        enabled: true,
-                                        enabledBorder: OutlineInputBorder(
-                                            borderSide: const BorderSide(
-                                                color: Colors.black, width: 1),
-                                            borderRadius:
-                                                BorderRadius.circular(5)),
-                                        border: OutlineInputBorder(
-                                            borderSide: const BorderSide(
-                                                color: Colors.blue, width: 1),
-                                            borderRadius:
-                                                BorderRadius.circular(10))),
-                                    style: const TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w600),
-                                    validator: (value) {
-                                      if (value == null || value.isEmpty) {
-                                        return 'Please enter a name';
-                                      }
-                                      return null;
-                                    },
-                                  ),
+                              Padding(
+                                padding: const EdgeInsets.all(3.0),
+                                child: TextFormField(
+                                  controller: nameControllers[index],
+                                  decoration: InputDecoration(
+                                      hintText: 'Enter First Name',
+                                      hintStyle: const TextStyle(
+                                          color: Colors.grey,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w600),
+                                      focusedBorder: OutlineInputBorder(
+                                          borderSide: const BorderSide(
+                                              color: Colors.blue, width: 2),
+                                          borderRadius:
+                                              BorderRadius.circular(5)),
+                                      enabled: true,
+                                      enabledBorder: OutlineInputBorder(
+                                          borderSide: const BorderSide(
+                                              color: Colors.black, width: 1),
+                                          borderRadius:
+                                              BorderRadius.circular(5)),
+                                      border: OutlineInputBorder(
+                                          borderSide: const BorderSide(
+                                              color: Colors.blue, width: 1),
+                                          borderRadius:
+                                              BorderRadius.circular(10))),
+                                  style: const TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter first name';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(3.0),
+                                child: TextFormField(
+                                  controller: lastnameControllers[index],
+                                  decoration: InputDecoration(
+                                      hintText: 'Enter Last Name',
+                                      hintStyle: const TextStyle(
+                                          color: Colors.grey,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w600),
+                                      focusedBorder: OutlineInputBorder(
+                                          borderSide: const BorderSide(
+                                              color: Colors.blue, width: 2),
+                                          borderRadius:
+                                              BorderRadius.circular(5)),
+                                      enabled: true,
+                                      enabledBorder: OutlineInputBorder(
+                                          borderSide: const BorderSide(
+                                              color: Colors.black, width: 1),
+                                          borderRadius:
+                                              BorderRadius.circular(5)),
+                                      border: OutlineInputBorder(
+                                          borderSide: const BorderSide(
+                                              color: Colors.blue, width: 1),
+                                          borderRadius:
+                                              BorderRadius.circular(10))),
+                                  style: const TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter last name';
+                                    }
+                                    return null;
+                                  },
                                 ),
                               ),
                             ],
@@ -144,10 +181,13 @@ class _ChildDetailsState extends State<ChildDetails> {
                   onTap: () {
                     if (_formKey.currentState?.validate() ?? false) {
                       passengerController.ChildPassengername.clear();
+                      passengerController.ChildPassengerlastname.clear();
 
                       for (int i = 0; i < airportController.Child; i++) {
                         passengerController.ChildPassengername.add(
                             nameControllers[i].text);
+                        passengerController.ChildPassengerlastname.add(
+                            lastnameControllers[i].text);
                       }
 
                       Get.back();

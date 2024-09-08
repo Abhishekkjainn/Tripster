@@ -1,11 +1,15 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tripster/controllers/passengerController.dart';
 import 'package:tripster/controllers/radiocontroller.dart';
 import 'package:tripster/controllers/returnSearch.dart';
 import 'package:tripster/controllers/searchcontroller.dart';
+import 'package:tripster/home.dart';
 import 'package:tripster/resultsPages/ReturnResult.dart';
 import 'package:tripster/resultsPages/SearchResult.dart';
+// import 'package:tripster/resultsPages/bookingConfirmedpage.dart';
 
 OnewayController onewayController = Get.find();
 RadioController radioController = Get.find();
@@ -186,5 +190,69 @@ class AirportController extends GetxController {
   callreturnSeatsMapreturn(String BookingId) async {
     final onewaySeatRequest = {"bookingId": BookingId};
     await returnController.doSearchSeat2(onewaySeatRequest);
+  }
+
+  //booking api call
+  callonewaybooking(String BookingId, double Price, double ChildPrice) async {
+    // Initialize the travellerInfo list
+    List<Map<String, String>> travellerInfo = [];
+    print((Price * (airportController.Adults) +
+        (ChildPrice * airportController.Child)));
+
+    // Generate info for Adults
+    for (int i = 0; i < airportController.Adults; i++) {
+      travellerInfo.add({
+        "ti": passengerController.AdultPassengerGender[i]
+            .toString(), // or Ms based on your needs
+        "fN": passengerController.AdultPassengername[i]
+            .toString(), // Change this according to actual data
+        "lN": passengerController.AdultPassengerlastname[i]
+            .toString(), // Suffix with a number to distinguish
+        "pt": "ADULT",
+      });
+    }
+
+    // Generate info for Children
+    for (int i = 0; i < airportController.Child; i++) {
+      travellerInfo.add({
+        "ti": "Ms", // or Mr based on your needs
+        "fN": passengerController.ChildPassengername[i]
+            .toString(), // Change this according to actual data
+        "lN": passengerController.ChildPassengerlastname[i]
+            .toString(), // Suffix with a number to distinguish
+        "pt": "CHILD",
+      });
+    }
+    final bookingformat = {
+      "bookingId": BookingId,
+      "paymentInfos": [
+        {
+          "amount": (Price * (airportController.Adults) +
+              (ChildPrice * airportController.Child))
+        }
+      ],
+      "travellerInfo": travellerInfo,
+      if (onewayController.isGst)
+        "gstInfo": {
+          "gstNumber": passengerController.gstno,
+          "email": passengerController.gstemail,
+          "registeredName": passengerController.gstname,
+          "mobile": passengerController.gstphn,
+          "address": passengerController.gstaddress
+        },
+      "deliveryInfo": {
+        "emails": [passengerController.AdultPassengeremail[0].toString()],
+        "contacts": [passengerController.AdultPassengerphone[0].toString()]
+      }
+    };
+    await bookingcontroller.bookSeat(bookingformat);
+    log(bookingformat.toString());
+  }
+
+  callonewaybookingDetails(String bookinId) async {
+    final bookingDetailsRequest = {
+      "bookingId": onewayController.BookingId[0].toString()
+    };
+    await bookingcontroller.fetchbookingDetails(bookingDetailsRequest);
   }
 }
