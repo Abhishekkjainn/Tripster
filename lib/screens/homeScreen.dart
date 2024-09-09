@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,10 +13,7 @@ import 'package:tripster/controllers/passengerController.dart';
 import 'package:tripster/controllers/radiocontroller.dart';
 import 'package:tripster/controllers/returnSearch.dart';
 import 'package:tripster/controllers/searchcontroller.dart';
-// import 'package:tripster_draft2/resultsPages/SearchResult.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:firebase_core/firebase_core.dart';
-// import 'package:tripster_draft2/firebase_options.dart';
 import 'package:tripster/screens/BlogScreen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -28,13 +24,13 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final radioController = Get.put(RadioController());
-  final airportController = Get.put(AirportController());
-  final onewayController = Get.put(OnewayController());
-  final returnController = Get.put(ReturnController());
-  final passengerController = Get.put(PassengerController());
-  final blogsController = Get.put(BlogsController());
-  final bookingcontroller = Get.put(Bookingcontroller());
+  RadioController radioController = Get.find();
+  AirportController airportController = Get.find();
+  OnewayController onewayController = Get.find();
+  ReturnController returnController = Get.find();
+  PassengerController passengerController = Get.find();
+  BlogsController blogsController = Get.find();
+  Bookingcontroller bookingcontroller = Get.find();
   LoginController loginController = Get.find();
 
   @override

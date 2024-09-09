@@ -26,13 +26,13 @@ class _BookingConfirmedState extends State<BookingConfirmed> {
   AirportController airportController = Get.find();
   ReturnController returnController = Get.find();
   PassengerController passengerController = Get.find();
-  Bookingcontroller bookingController = Get.find();
+  Bookingcontroller bookingcontroller = Get.find();
 
   Future<void> postTrip() async {
     try {
       // Construct the document name based on DepAirportCode and ArrAirportCode
       String docName =
-          'jainabhishek1904@gmail.com${bookingController.CreatedOn}';
+          'jainabhishek1904@gmail.com${bookingcontroller.CreatedOn}';
 
       // Reference to the 'trips' collection in Firestore
       CollectionReference tripsCollection =
@@ -40,41 +40,41 @@ class _BookingConfirmedState extends State<BookingConfirmed> {
 
       // Prepare the data to be sent to Firestore
       Map<String, dynamic> tripData = {
-        'DepAirportCode': bookingController.DepAirportCode,
-        'ArrAirportCode': bookingController.ArrAirportCode,
-        'OnewayDate': bookingController.DepDate,
-        'Adults': bookingController.Adults,
-        'Child': bookingController.Child,
-        'SelectedCabin': bookingController.SelectedCabin,
-        'AirlineCode': bookingController.AirlineCode,
-        'AirlineList': bookingController.AirlineList,
-        'Flightname': bookingController.Flightname,
-        'DepTime': bookingController.DepTime,
-        'DepDate': bookingController.DepDate,
-        'Stops': bookingController.Stops,
-        'Duration': bookingController.Duration,
-        'ArrTime': bookingController.ArrTime,
-        'ArrDate': bookingController.ArrDate,
-        'DepCityName': bookingController.DepCityName,
-        'ArrCityName': bookingController.ArrCityName,
-        'DepAirportName': bookingController.DepAirportName,
-        'ArrAirportName': bookingController.ArrAirportName,
-        'DepTerminal': bookingController.DepTerminal,
-        'ArrTerminal': bookingController.ArrTerminal,
-        'cabin': bookingController.cabin,
-        'handbaggage': bookingController.handbaggage,
-        'Travellernames': bookingController.Travellernames,
-        'Travellergender': bookingController.Travellergender,
-        'AirlinePNR': bookingController.AirlinePNR,
-        'TicketNumber': bookingController.TicketNumber,
-        'Class': bookingController.Class,
-        'Seat': bookingController.Seat,
-        'Status': bookingController.Status,
-        'Basefare': bookingController.Basefare,
-        'taxes': bookingController.taxes,
-        'seatprices': bookingController.seatprices,
-        'ticketStatus': bookingController.ticketStatus,
-        'BookingID': bookingController.BookingID,
+        'DepAirportCode': bookingcontroller.DepAirportCode,
+        'ArrAirportCode': bookingcontroller.ArrAirportCode,
+        'OnewayDate': bookingcontroller.DepDate,
+        'Adults': bookingcontroller.Adults,
+        'Child': bookingcontroller.Child,
+        'SelectedCabin': bookingcontroller.SelectedCabin,
+        'AirlineCode': bookingcontroller.AirlineCode,
+        'AirlineList': bookingcontroller.AirlineList,
+        'Flightname': bookingcontroller.Flightname,
+        'DepTime': bookingcontroller.DepTime,
+        'DepDate': bookingcontroller.DepDate,
+        'Stops': bookingcontroller.Stops,
+        'Duration': bookingcontroller.Duration,
+        'ArrTime': bookingcontroller.ArrTime,
+        'ArrDate': bookingcontroller.ArrDate,
+        'DepCityName': bookingcontroller.DepCityName,
+        'ArrCityName': bookingcontroller.ArrCityName,
+        'DepAirportName': bookingcontroller.DepAirportName,
+        'ArrAirportName': bookingcontroller.ArrAirportName,
+        'DepTerminal': bookingcontroller.DepTerminal,
+        'ArrTerminal': bookingcontroller.ArrTerminal,
+        'cabin': bookingcontroller.cabin,
+        'handbaggage': bookingcontroller.handbaggage,
+        'Travellernames': bookingcontroller.Travellernames,
+        'Travellergender': bookingcontroller.Travellergender,
+        'AirlinePNR': bookingcontroller.AirlinePNR,
+        'TicketNumber': bookingcontroller.TicketNumber,
+        'Class': bookingcontroller.Class,
+        'Seat': bookingcontroller.Seat,
+        'Status': bookingcontroller.Status,
+        'Basefare': bookingcontroller.Basefare,
+        'taxes': bookingcontroller.taxes,
+        'seatprices': bookingcontroller.seatprices,
+        'ticketStatus': bookingcontroller.ticketStatus,
+        'BookingID': bookingcontroller.BookingID,
       };
 
       // Attempt to post data to Firestore
@@ -107,7 +107,7 @@ class _BookingConfirmedState extends State<BookingConfirmed> {
   @override
   void initState() {
     super.initState();
-    if (bookingController.isBooked == true) {
+    if (bookingcontroller.isBooked == true) {
       postTrip();
     }
   }
@@ -116,7 +116,7 @@ class _BookingConfirmedState extends State<BookingConfirmed> {
   Widget build(BuildContext context) {
     return GetBuilder<Bookingcontroller>(
       builder: (Bookingcontroller) {
-        return (bookingController.isBooked == false)
+        return (bookingcontroller.isBooked == false)
             ? Scaffold(
                 backgroundColor: Colors.white,
                 bottomNavigationBar: Container(
@@ -161,7 +161,7 @@ class _BookingConfirmedState extends State<BookingConfirmed> {
                   centerTitle: true,
                   toolbarHeight: 70,
                   automaticallyImplyLeading: false,
-                  leading: (bookingController.isBooked == true)
+                  leading: (bookingcontroller.isBooked == true)
                       ? GestureDetector(
                           onTap: () {
                             Get.offAll(Home(),
@@ -315,7 +315,7 @@ class _BookingConfirmedState extends State<BookingConfirmed> {
                                                   onewayController.BookingId[0]
                                                       .toString());
 
-                                          (bookingController.isErrordetails ==
+                                          (bookingcontroller.isErrordetails ==
                                                   0)
                                               ? Get.to(() => ETicketPage())
                                               : Get.to(() => Errorpage());

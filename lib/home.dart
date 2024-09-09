@@ -7,6 +7,14 @@ import 'package:tripster/screens/MyTripsScreen.dart';
 import 'package:tripster/screens/ProfileScreen.dart';
 import 'package:tripster/screens/SupportScreen.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:tripster/controllers/airportcontroller.dart';
+import 'package:tripster/controllers/blogscontroller.dart';
+// import 'package:tripster/controllers/bookingController.dart';
+// import 'package:tripster/controllers/loginController.dart';
+import 'package:tripster/controllers/passengerController.dart';
+import 'package:tripster/controllers/radiocontroller.dart';
+import 'package:tripster/controllers/returnSearch.dart';
+import 'package:tripster/controllers/searchcontroller.dart';
 
 class Home extends StatefulWidget {
   Home({super.key});
@@ -15,9 +23,21 @@ class Home extends StatefulWidget {
   State<Home> createState() => _HomeState();
 }
 
-Bookingcontroller bookingcontroller = Get.put(Bookingcontroller());
-
 class _HomeState extends State<Home> {
+  final onewayController = Get.put(OnewayController());
+  final bookingcontroller = Get.put(Bookingcontroller());
+  final radioController = Get.put(RadioController());
+  final airportController = Get.put(AirportController());
+  final returnController = Get.put(ReturnController());
+  final passengerController = Get.put(PassengerController());
+  final blogsController = Get.put(BlogsController());
+  // Bookingcontroller bookingcontroller = Get.find();
+  // RadioController radioController = Get.find();
+  // AirportController airportController = Get.find();
+  // OnewayController onewayController = Get.find();
+  // ReturnController returnController = Get.find();
+  // PassengerController passengerController = Get.find();
+  // BlogsController blogsController = Get.find();
   int ScreenIndex = 0;
 
   List Screens = [

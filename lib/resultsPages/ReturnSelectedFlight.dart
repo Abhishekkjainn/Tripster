@@ -19,12 +19,11 @@ class ReturnSelectedFlights extends StatefulWidget {
   State<ReturnSelectedFlights> createState() => _ReturnSelectedFlightsState();
 }
 
-OnewayController onewayController = Get.find();
+class _ReturnSelectedFlightsState extends State<ReturnSelectedFlights> {
+  OnewayController onewayController = Get.find();
 AirportController airportController = Get.find();
 ReturnController returnController = Get.find();
 PassengerController passengerController = Get.find();
-
-class _ReturnSelectedFlightsState extends State<ReturnSelectedFlights> {
   @override
   void initState() {
     super.initState();

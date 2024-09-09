@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:tripster/controllers/airportcontroller.dart';
+import 'package:get/get.dart';
+import 'package:tripster/controllers/searchcontroller.dart';
 
 class MealPage extends StatefulWidget {
   const MealPage({super.key});
@@ -10,6 +11,8 @@ class MealPage extends StatefulWidget {
 }
 
 class _MealPageState extends State<MealPage> {
+  OnewayController onewayController = Get.find();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

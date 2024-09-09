@@ -9,15 +9,15 @@ class CancelPage extends StatefulWidget {
 }
 
 class _CancelPageState extends State<CancelPage> {
-  final Bookingcontroller bookingController = Get.find();
+  Bookingcontroller bookingcontroller = Get.find();
 
   @override
   Widget build(BuildContext context) {
     int canceledCount = 0;
 
     // Counting canceled tickets
-    for (int i = 0; i < bookingController.tripsList.length; i++) {
-      if (bookingController.tripsList[i]['ticketStatus'] == 1) {
+    for (int i = 0; i < bookingcontroller.tripsList.length; i++) {
+      if (bookingcontroller.tripsList[i]['ticketStatus'] == 1) {
         canceledCount++;
       }
     }
@@ -25,7 +25,7 @@ class _CancelPageState extends State<CancelPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: GetBuilder<Bookingcontroller>(
-        init: bookingController,
+        init: bookingcontroller,
         builder: (controller) {
           if (controller.isLoading) {
             return Center(
@@ -107,7 +107,7 @@ SingleChildScrollView ticket(
     String BookingID) {
   return SingleChildScrollView(
     child: Padding(
-      padding: const EdgeInsets.only(left: 20,right:20,top:20),
+      padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
       child: Column(
         children: [
           IntrinsicHeight(

@@ -1,21 +1,21 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tripster/controllers/bookingController.dart';
 import 'package:tripster/controllers/passengerController.dart';
 import 'package:tripster/controllers/radiocontroller.dart';
 import 'package:tripster/controllers/returnSearch.dart';
 import 'package:tripster/controllers/searchcontroller.dart';
-import 'package:tripster/home.dart';
 import 'package:tripster/resultsPages/ReturnResult.dart';
 import 'package:tripster/resultsPages/SearchResult.dart';
-// import 'package:tripster/resultsPages/bookingConfirmedpage.dart';
+// import 'package:tripster/tripsScreen/completedTripspage.dart';
 
-OnewayController onewayController = Get.find();
-RadioController radioController = Get.find();
-SearchController searchController = Get.find();
-ReturnController returnController = Get.find();
-PassengerController passengerController = Get.find();
+final onewayController = Get.put(OnewayController());
+final radioController = Get.put(RadioController());
+final searchController = Get.put(SearchController());
+final returnController = Get.put(ReturnController());
+final passengerController = Get.put(PassengerController());
+final bookingcontroller = Get.put(Bookingcontroller());
 
 class AirportController extends GetxController {
   String fromAirportCode = 'FROM';
@@ -196,11 +196,10 @@ class AirportController extends GetxController {
   callonewaybooking(String BookingId, double Price, double ChildPrice) async {
     // Initialize the travellerInfo list
     List<Map<String, String>> travellerInfo = [];
-    print((Price * (airportController.Adults) +
-        (ChildPrice * airportController.Child)));
+    print((Price * (Adults) + (ChildPrice * Child)));
 
     // Generate info for Adults
-    for (int i = 0; i < airportController.Adults; i++) {
+    for (int i = 0; i < Adults; i++) {
       travellerInfo.add({
         "ti": passengerController.AdultPassengerGender[i]
             .toString(), // or Ms based on your needs
@@ -213,7 +212,7 @@ class AirportController extends GetxController {
     }
 
     // Generate info for Children
-    for (int i = 0; i < airportController.Child; i++) {
+    for (int i = 0; i < Child; i++) {
       travellerInfo.add({
         "ti": "Ms", // or Mr based on your needs
         "fN": passengerController.ChildPassengername[i]
@@ -226,10 +225,7 @@ class AirportController extends GetxController {
     final bookingformat = {
       "bookingId": BookingId,
       "paymentInfos": [
-        {
-          "amount": (Price * (airportController.Adults) +
-              (ChildPrice * airportController.Child))
-        }
+        {"amount": (Price * (Adults) + (ChildPrice * Child))}
       ],
       "travellerInfo": travellerInfo,
       if (onewayController.isGst)

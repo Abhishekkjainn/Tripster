@@ -3,12 +3,12 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tripster/controllers/airportcontroller.dart';
+// import 'package:tripster/controllers/airportcontroller.dart';
 // import 'package:tripster_draft2/resultsPages/ReturnResult.dart';
 import 'package:http/http.dart' as http;
 import 'package:tripster/home.dart';
 
-AirportController airportController = Get.find();
+// AirportController airportController = Get.find();
 
 class ReturnController extends GetxController {
   late Map<String, dynamic> jsonData;

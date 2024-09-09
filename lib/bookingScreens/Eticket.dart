@@ -10,7 +10,7 @@ class ETicketPage extends StatefulWidget {
 }
 
 class _ETicketPageState extends State<ETicketPage> {
-  Bookingcontroller bookingController = Get.find();
+  Bookingcontroller bookingcontroller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -273,7 +273,7 @@ class _ETicketPageState extends State<ETicketPage> {
                         child: Padding(
                           padding: const EdgeInsets.all(3.0),
                           child: Text(
-                            bookingController.Basefare.toString() + ' Rs/-',
+                            bookingcontroller.Basefare.toString() + ' Rs/-',
                             textAlign: TextAlign.center,
                             overflow: TextOverflow.clip,
                             maxLines: 2,
@@ -316,7 +316,7 @@ class _ETicketPageState extends State<ETicketPage> {
                         child: Padding(
                           padding: const EdgeInsets.all(3.0),
                           child: Text(
-                            bookingController.taxes.toString() + ' Rs/-',
+                            bookingcontroller.taxes.toString() + ' Rs/-',
                             textAlign: TextAlign.center,
                             overflow: TextOverflow.clip,
                             maxLines: 2,
@@ -359,7 +359,7 @@ class _ETicketPageState extends State<ETicketPage> {
                         child: Padding(
                           padding: const EdgeInsets.all(3.0),
                           child: Text(
-                            bookingController.seatprices.toString() + ' Rs/-',
+                            bookingcontroller.seatprices.toString() + ' Rs/-',
                             textAlign: TextAlign.center,
                             overflow: TextOverflow.clip,
                             maxLines: 2,
@@ -534,14 +534,14 @@ class _ETicketPageState extends State<ETicketPage> {
                             padding: const EdgeInsets.all(3.0),
                             child: ListView.builder(
                               itemCount:
-                                  bookingController.Travellernames.length,
+                                  bookingcontroller.Travellernames.length,
                               physics: NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
                               itemBuilder: (context, index) {
                                 return Text(
-                                  bookingController.Travellergender[index] +
+                                  bookingcontroller.Travellergender[index] +
                                       '.' +
-                                      bookingController.Travellernames[index],
+                                      bookingcontroller.Travellernames[index],
                                   textAlign: TextAlign.start,
                                   overflow: TextOverflow.clip,
                                   maxLines: 2,
@@ -564,12 +564,12 @@ class _ETicketPageState extends State<ETicketPage> {
                             padding: const EdgeInsets.all(3.0),
                             child: ListView.builder(
                               itemCount:
-                                  bookingController.Travellernames.length,
+                                  bookingcontroller.Travellernames.length,
                               physics: NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
                               itemBuilder: (context, index) {
                                 return Text(
-                                  bookingController.AirlinePNR[index],
+                                  bookingcontroller.AirlinePNR[index],
                                   textAlign: TextAlign.start,
                                   overflow: TextOverflow.clip,
                                   maxLines: 2,
@@ -592,12 +592,12 @@ class _ETicketPageState extends State<ETicketPage> {
                             padding: const EdgeInsets.all(3.0),
                             child: ListView.builder(
                               itemCount:
-                                  bookingController.Travellernames.length,
+                                  bookingcontroller.Travellernames.length,
                               physics: NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
                               itemBuilder: (context, index) {
                                 return Text(
-                                  bookingController.TicketNumber[index],
+                                  bookingcontroller.TicketNumber[index],
                                   textAlign: TextAlign.start,
                                   overflow: TextOverflow.clip,
                                   maxLines: 2,
@@ -620,12 +620,12 @@ class _ETicketPageState extends State<ETicketPage> {
                             padding: const EdgeInsets.all(3.0),
                             child: ListView.builder(
                               itemCount:
-                                  bookingController.Travellernames.length,
+                                  bookingcontroller.Travellernames.length,
                               physics: NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
                               itemBuilder: (context, index) {
                                 return Text(
-                                  bookingController.Class[index],
+                                  bookingcontroller.Class[index],
                                   textAlign: TextAlign.center,
                                   overflow: TextOverflow.clip,
                                   maxLines: 2,
@@ -648,12 +648,12 @@ class _ETicketPageState extends State<ETicketPage> {
                             padding: const EdgeInsets.all(3.0),
                             child: ListView.builder(
                               itemCount:
-                                  bookingController.Travellernames.length,
+                                  bookingcontroller.Travellernames.length,
                               physics: NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
                               itemBuilder: (context, index) {
                                 return Text(
-                                  bookingController.Seat[index],
+                                  bookingcontroller.Seat[index],
                                   textAlign: TextAlign.center,
                                   overflow: TextOverflow.clip,
                                   maxLines: 2,
@@ -672,12 +672,12 @@ class _ETicketPageState extends State<ETicketPage> {
                           alignment: Alignment.center,
                           decoration: BoxDecoration(),
                           child: ListView.builder(
-                            itemCount: bookingController.Travellernames.length,
+                            itemCount: bookingcontroller.Travellernames.length,
                             physics: NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
                             itemBuilder: (context, index) {
                               return Text(
-                                bookingController.Status[index],
+                                bookingcontroller.Status[index],
                                 textAlign: TextAlign.center,
                                 overflow: TextOverflow.clip,
                                 maxLines: 2,
@@ -725,7 +725,7 @@ class _ETicketPageState extends State<ETicketPage> {
                           width: 10,
                         ),
                         Text(
-                          bookingController.DepAirportCode,
+                          bookingcontroller.DepAirportCode,
                           style: TextStyle(
                               color: Colors.black,
                               fontSize: 14,
@@ -739,7 +739,7 @@ class _ETicketPageState extends State<ETicketPage> {
                               width: 30,
                             )),
                         Text(
-                          bookingController.ArrAirportCode,
+                          bookingcontroller.ArrAirportCode,
                           style: TextStyle(
                               color: Colors.black,
                               fontSize: 14,
@@ -757,7 +757,7 @@ class _ETicketPageState extends State<ETicketPage> {
                       Padding(
                         padding: const EdgeInsets.only(left: 0, right: 2),
                         child: Text(
-                          formatDate(bookingController.DepDate.toString()),
+                          formatDate(bookingcontroller.DepDate.toString()),
                           style: TextStyle(
                               color: Colors.grey,
                               fontSize: 10,
@@ -767,19 +767,19 @@ class _ETicketPageState extends State<ETicketPage> {
                       Padding(
                         padding: const EdgeInsets.only(left: 2, right: 3),
                         child: Text(
-                          '${bookingController.Adults} Adult ~',
+                          '${bookingcontroller.Adults} Adult ~',
                           style: TextStyle(
                               color: Colors.grey,
                               fontSize: 10,
                               fontWeight: FontWeight.w600),
                         ),
                       ),
-                      (bookingController.Child == 0)
+                      (bookingcontroller.Child == 0)
                           ? Text('')
                           : Padding(
                               padding: const EdgeInsets.only(left: 2, right: 3),
                               child: Text(
-                                '${bookingController.Child} Child ~',
+                                '${bookingcontroller.Child} Child ~',
                                 style: TextStyle(
                                     color: Colors.grey,
                                     fontSize: 10,
@@ -789,7 +789,7 @@ class _ETicketPageState extends State<ETicketPage> {
                       Padding(
                         padding: const EdgeInsets.only(left: 2, right: 2),
                         child: Text(
-                          bookingController.SelectedCabin,
+                          bookingcontroller.SelectedCabin,
                           style: TextStyle(
                               color: Colors.grey,
                               fontSize: 10,
@@ -811,16 +811,16 @@ class _ETicketPageState extends State<ETicketPage> {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(100),
                           child: Image(
-                            image: (bookingController.AirlineCode.toString()
+                            image: (bookingcontroller.AirlineCode.toString()
                                         .toLowerCase() ==
                                     '6e')
                                 ? AssetImage('assets/images/indigo.png')
-                                : (bookingController.AirlineCode.toString()
+                                : (bookingcontroller.AirlineCode.toString()
                                             .toLowerCase() ==
                                         'uk')
                                     ? AssetImage(
                                         'assets/images/vistaralogo.png')
-                                    : (bookingController.AirlineCode.toString()
+                                    : (bookingcontroller.AirlineCode.toString()
                                                 .toLowerCase() ==
                                             'sg')
                                         ? AssetImage(
@@ -833,11 +833,11 @@ class _ETicketPageState extends State<ETicketPage> {
                       ),
                       Text(
                         // 'Indigo | 6E 6114',
-                        bookingController.AirlineList +
+                        bookingcontroller.AirlineList +
                             ' | ' +
-                            bookingController.AirlineCode +
+                            bookingcontroller.AirlineCode +
                             ' ' +
-                            bookingController.Flightname,
+                            bookingcontroller.Flightname,
                         style: TextStyle(
                             color: Colors.black,
                             fontSize: 12,
@@ -857,16 +857,16 @@ class _ETicketPageState extends State<ETicketPage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                bookingController.DepTime,
+                                bookingcontroller.DepTime,
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.w600,
                                     fontSize: 12),
                               ),
                               Text(
-                                bookingController.DepAirportCode +
+                                bookingcontroller.DepAirportCode +
                                     ' . ' +
-                                    formatDate(bookingController.DepDate),
+                                    formatDate(bookingcontroller.DepDate),
                                 style: TextStyle(
                                   color: Colors.grey,
                                   fontSize: 8,
@@ -881,9 +881,9 @@ class _ETicketPageState extends State<ETicketPage> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text(
-                              (bookingController.Stops == 0)
+                              (bookingcontroller.Stops == 0)
                                   ? 'Non-Stop'
-                                  : (bookingController.Stops.toString() +
+                                  : (bookingcontroller.Stops.toString() +
                                       ' Stops'),
                               style: TextStyle(
                                   color: Colors.black,
@@ -895,7 +895,7 @@ class _ETicketPageState extends State<ETicketPage> {
                               width: 60,
                             ),
                             Text(
-                              formatDuration(bookingController.Duration),
+                              formatDuration(bookingcontroller.Duration),
                               style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 10,
@@ -910,16 +910,16 @@ class _ETicketPageState extends State<ETicketPage> {
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               Text(
-                                bookingController.ArrTime,
+                                bookingcontroller.ArrTime,
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.w600,
                                     fontSize: 12),
                               ),
                               Text(
-                                bookingController.ArrAirportCode +
+                                bookingcontroller.ArrAirportCode +
                                     ' . ' +
-                                    formatDate(bookingController.ArrDate),
+                                    formatDate(bookingcontroller.ArrDate),
                                 style: TextStyle(
                                   color: Colors.grey,
                                   fontSize: 8,
@@ -944,7 +944,7 @@ class _ETicketPageState extends State<ETicketPage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                bookingController.DepCityName,
+                                bookingcontroller.DepCityName,
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.w700,
@@ -953,7 +953,7 @@ class _ETicketPageState extends State<ETicketPage> {
                               Container(
                                 width: 120,
                                 child: Text(
-                                  bookingController.DepAirportName,
+                                  bookingcontroller.DepAirportName,
                                   maxLines: 3,
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
@@ -967,7 +967,7 @@ class _ETicketPageState extends State<ETicketPage> {
                                 padding: const EdgeInsets.only(top: 5),
                                 child: Text(
                                   ('Terminal ' +
-                                      bookingController.DepTerminal.toString()),
+                                      bookingcontroller.DepTerminal.toString()),
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
                                     color: Colors.grey,
@@ -986,7 +986,7 @@ class _ETicketPageState extends State<ETicketPage> {
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               Text(
-                                bookingController.ArrCityName,
+                                bookingcontroller.ArrCityName,
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.w700,
@@ -996,7 +996,7 @@ class _ETicketPageState extends State<ETicketPage> {
                                 alignment: Alignment.centerRight,
                                 width: 120,
                                 child: Text(
-                                  bookingController.ArrAirportName,
+                                  bookingcontroller.ArrAirportName,
                                   textAlign: TextAlign.end,
                                   maxLines: 3,
                                   overflow: TextOverflow.ellipsis,
@@ -1011,7 +1011,7 @@ class _ETicketPageState extends State<ETicketPage> {
                                 padding: const EdgeInsets.only(top: 5),
                                 child: Text(
                                   'Terminal ' +
-                                      bookingController.ArrTerminal.toString(),
+                                      bookingcontroller.ArrTerminal.toString(),
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
                                     color: Colors.grey,
@@ -1036,7 +1036,7 @@ class _ETicketPageState extends State<ETicketPage> {
                           size: 10,
                         ),
                         Text(
-                          'Cabin Baggage - ${bookingController.cabin}',
+                          'Cabin Baggage - ${bookingcontroller.cabin}',
                           style: TextStyle(
                               color: Colors.grey,
                               fontSize: 10,
@@ -1051,7 +1051,7 @@ class _ETicketPageState extends State<ETicketPage> {
                           size: 10,
                         ),
                         Text(
-                          'Hand Baggage - ${bookingController.handbaggage}',
+                          'Hand Baggage - ${bookingcontroller.handbaggage}',
                           style: TextStyle(
                               color: Colors.grey,
                               fontSize: 10,

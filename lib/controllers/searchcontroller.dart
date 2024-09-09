@@ -3,12 +3,12 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
-import 'package:tripster/controllers/airportcontroller.dart';
+// import 'package:tripster/controllers/airportcontroller.dart';
 
 class OnewayController extends GetxController {
+  // AirportController airportController = Get.find();
   int isError = 0;
   int notFound = 0;
-  AirportController airportController = Get.find();
   late Map<String, dynamic> jsonData;
   late Map<String, dynamic> cancelData;
   late Map<String, dynamic> seatData;

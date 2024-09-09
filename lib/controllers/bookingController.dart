@@ -8,8 +8,8 @@ import 'package:tripster/controllers/airportcontroller.dart';
 import 'package:tripster/controllers/searchcontroller.dart';
 import 'package:http/http.dart' as http;
 
-OnewayController onewayController = Get.find();
-AirportController airportController = Get.find();
+final onewayController = Get.put(OnewayController());
+final airportController = Get.put(AirportController());
 
 class Bookingcontroller extends GetxController {
   late Map<String, dynamic> bookingData;

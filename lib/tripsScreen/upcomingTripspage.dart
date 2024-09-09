@@ -11,15 +11,15 @@ class TripsScreen extends StatefulWidget {
 }
 
 class _TripsScreenState extends State<TripsScreen> {
-  final Bookingcontroller bookingController = Get.find();
+  Bookingcontroller bookingcontroller = Get.find();
 
   @override
   Widget build(BuildContext context) {
     int compcount = 0;
-    for (int i = 0; i < bookingController.tripsList.length; i++) {
-      if (bookingController
-          .compareDates(bookingController.tripsList[i]['DepDate'])) {
-        if (bookingController.tripsList[i]['ticketStatus'] == 0) {
+    for (int i = 0; i < bookingcontroller.tripsList.length; i++) {
+      if (bookingcontroller
+          .compareDates(bookingcontroller.tripsList[i]['DepDate'])) {
+        if (bookingcontroller.tripsList[i]['ticketStatus'] == 0) {
           compcount++;
         }
       } else {}
@@ -27,7 +27,7 @@ class _TripsScreenState extends State<TripsScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: GetBuilder<Bookingcontroller>(
-        init: bookingController,
+        init: bookingcontroller,
         builder: (controller) {
           if (controller.isLoading) {
             return Center(
@@ -131,7 +131,7 @@ SingleChildScrollView ticket(
     String BookingID) {
   return SingleChildScrollView(
     child: Padding(
-      padding: const EdgeInsets.only(left: 20,right:20,top:20),
+      padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
       child: Column(
         children: [
           IntrinsicHeight(
