@@ -17,6 +17,14 @@ import 'dart:async';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:tripster/firebase_options.dart';
 import 'package:tripster/screens/LoginScreen.dart';
+import 'package:tripster/controllers/passengerController.dart';
+import 'package:tripster/controllers/radiocontroller.dart';
+import 'package:tripster/controllers/returnSearch.dart';
+import 'package:tripster/controllers/searchcontroller.dart';
+import 'package:get/get.dart';
+import 'package:tripster/controllers/bookingController.dart';
+import 'package:tripster/controllers/airportcontroller.dart';
+import 'package:tripster/controllers/blogscontroller.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -49,6 +57,13 @@ class Splash extends StatefulWidget {
 
 class _SplashState extends State<Splash> {
   final loginController = Get.put(LoginController());
+  final onewayController = Get.put(OnewayController());
+  final bookingcontroller = Get.put(Bookingcontroller());
+  final radioController = Get.put(RadioController());
+  final airportController = Get.put(AirportController());
+  final returnController = Get.put(ReturnController());
+  final passengerController = Get.put(PassengerController());
+  final blogsController = Get.put(BlogsController());
   @override
   void initState() {
     super.initState();

@@ -24,20 +24,13 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  final onewayController = Get.put(OnewayController());
-  final bookingcontroller = Get.put(Bookingcontroller());
-  final radioController = Get.put(RadioController());
-  final airportController = Get.put(AirportController());
-  final returnController = Get.put(ReturnController());
-  final passengerController = Get.put(PassengerController());
-  final blogsController = Get.put(BlogsController());
-  // Bookingcontroller bookingcontroller = Get.find();
-  // RadioController radioController = Get.find();
-  // AirportController airportController = Get.find();
-  // OnewayController onewayController = Get.find();
-  // ReturnController returnController = Get.find();
-  // PassengerController passengerController = Get.find();
-  // BlogsController blogsController = Get.find();
+  Bookingcontroller bookingcontroller = Get.find();
+  RadioController radioController = Get.find();
+  AirportController airportController = Get.find();
+  OnewayController onewayController = Get.find();
+  ReturnController returnController = Get.find();
+  PassengerController passengerController = Get.find();
+  BlogsController blogsController = Get.find();
   int ScreenIndex = 0;
 
   List Screens = [

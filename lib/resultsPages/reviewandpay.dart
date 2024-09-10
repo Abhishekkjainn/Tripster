@@ -54,7 +54,9 @@ class _ReviewandPayState extends State<ReviewandPay> {
                   await airportController.callonewaybooking(
                       onewayController.BookingId[0].toString(),
                       bookingcontroller.tf,
-                      onewayController.ChildPrices[widget.index]);
+                      (airportController.Child > 0)
+                          ? onewayController.ChildPrices[widget.index]
+                          : 0);
 
                   Get.off(() => BookingConfirmed(index: widget.index),
                       transition: Transition.rightToLeft);

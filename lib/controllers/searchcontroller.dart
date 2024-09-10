@@ -3,10 +3,10 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
-// import 'package:tripster/controllers/airportcontroller.dart';
+import 'package:tripster/controllers/airportcontroller.dart';
 
 class OnewayController extends GetxController {
-  // AirportController airportController = Get.find();
+  final airportController = Get.put(AirportController());
   int isError = 0;
   int notFound = 0;
   late Map<String, dynamic> jsonData;
@@ -108,76 +108,110 @@ class OnewayController extends GetxController {
     update();
   }
 
-  PopulateLists() {
+  PopulateListssearch() {
     cleanList();
     isError = 0;
+    print(length.toString() + ' populate length ');
     for (int i = 0; i < length; i++) {
       AirlineList.add(jsonData['searchResult']['tripInfos']['ONWARD'][i]['sI']
           [0]['fD']['aI']['name']);
+
       AirlineCode.add(jsonData['searchResult']['tripInfos']['ONWARD'][i]['sI']
           [0]['fD']['aI']['code']);
+
       AirlineLicensed.add(jsonData['searchResult']['tripInfos']['ONWARD'][i]
           ['sI'][0]['fD']['aI']['isLcc']);
+
       Flightname.add(jsonData['searchResult']['tripInfos']['ONWARD'][i]['sI'][0]
           ['fD']['fN']);
+
       FlightType.add(jsonData['searchResult']['tripInfos']['ONWARD'][i]['sI'][0]
           ['fD']['eT']);
+
       Stops.add(
           jsonData['searchResult']['tripInfos']['ONWARD'][i]['sI'][0]['stops']);
       Duration.add(jsonData['searchResult']['tripInfos']['ONWARD'][i]['sI'][0]
           ['duration']);
+
       DepAirportCode.add(jsonData['searchResult']['tripInfos']['ONWARD'][i]
           ['sI'][0]['da']['code']);
+
       DepAirportName.add(jsonData['searchResult']['tripInfos']['ONWARD'][i]
           ['sI'][0]['da']['name']);
+
       DepCityCode.add(jsonData['searchResult']['tripInfos']['ONWARD'][i]['sI']
           [0]['da']['code']);
+
       DepCityName.add(jsonData['searchResult']['tripInfos']['ONWARD'][i]['sI']
           [0]['da']['city']);
+
       DepTerminal.add(jsonData['searchResult']['tripInfos']['ONWARD'][i]['sI']
           [0]['da']['terminal']);
+
       ArrAirportCode.add(jsonData['searchResult']['tripInfos']['ONWARD'][i]
           ['sI'][0]['aa']['code']);
+
       ArrAirportName.add(jsonData['searchResult']['tripInfos']['ONWARD'][i]
           ['sI'][0]['aa']['name']);
+
       ArrCityCode.add(jsonData['searchResult']['tripInfos']['ONWARD'][i]['sI']
           [0]['aa']['code']);
+
       ArrCityName.add(jsonData['searchResult']['tripInfos']['ONWARD'][i]['sI']
           [0]['aa']['city']);
+
       ArrTerminal.add(jsonData['searchResult']['tripInfos']['ONWARD'][i]['sI']
           [0]['aa']['terminal']);
+
       DepTime.add(
           jsonData['searchResult']['tripInfos']['ONWARD'][i]['sI'][0]['dt']);
+
       DepDate.add(
           jsonData['searchResult']['tripInfos']['ONWARD'][i]['sI'][0]['dt']);
+
       ArrTime.add(
           jsonData['searchResult']['tripInfos']['ONWARD'][i]['sI'][0]['at']);
+
       ArrDate.add(
           jsonData['searchResult']['tripInfos']['ONWARD'][i]['sI'][0]['at']);
+
       isReturn.add(
           jsonData['searchResult']['tripInfos']['ONWARD'][i]['sI'][0]['isRs']);
+
       isNextDay.add(
           jsonData['searchResult']['tripInfos']['ONWARD'][i]['sI'][0]['iand']);
+
       AdultPrices.add(jsonData['searchResult']['tripInfos']['ONWARD'][i]
           ['totalPriceList'][0]['fd']['ADULT']['fC']['TF']);
-      ChildPrices.add(jsonData['searchResult']['tripInfos']['ONWARD'][i]
-          ['totalPriceList'][0]['fd']['CHILD']['fC']['TF']);
+
+      if (airportController.Child > 0) {
+        ChildPrices.add(jsonData['searchResult']['tripInfos']['ONWARD'][i]
+            ['totalPriceList'][0]['fd']['CHILD']['fC']['TF']);
+      }
       AdultTaxPrices.add(jsonData['searchResult']['tripInfos']['ONWARD'][i]
           ['totalPriceList'][0]['fd']['ADULT']['fC']['TAF']);
+
       SeatsRemaining.add(jsonData['searchResult']['tripInfos']['ONWARD'][i]
           ['totalPriceList'][0]['fd']['ADULT']['sR']);
+
       Baggage.add(jsonData['searchResult']['tripInfos']['ONWARD'][i]
           ['totalPriceList'][0]['fd']['ADULT']['bI']['iB']);
+
       Cabinbag.add(jsonData['searchResult']['tripInfos']['ONWARD'][i]
           ['totalPriceList'][0]['fd']['ADULT']['bI']['cB']);
+
       Id.add(jsonData['searchResult']['tripInfos']['ONWARD'][i]
           ['totalPriceList'][0]['id']);
+
       FirstIdentifiername.add(jsonData['searchResult']['tripInfos']['ONWARD'][i]
           ['totalPriceList'][0]['fareIdentifier']);
+
       FirstIdentifierAdultTotal.add(jsonData['searchResult']['tripInfos']
           ['ONWARD'][i]['totalPriceList'][0]['fd']['ADULT']['fC']['TF']);
+
       FirstIdentifierAdultTax.add(jsonData['searchResult']['tripInfos']
           ['ONWARD'][i]['totalPriceList'][0]['fd']['ADULT']['fC']['TAF']);
+
       FirstIdentifierAdultrefundable.add(jsonData['searchResult']['tripInfos']
           ['ONWARD'][i]['totalPriceList'][0]['fd']['ADULT']['rT']);
 
@@ -210,29 +244,6 @@ class OnewayController extends GetxController {
       MealIncluded.add(jsonData['searchResult']['tripInfos']['ONWARD'][i]
           ['totalPriceList'][0]['fd']['ADULT']['mI']);
     }
-    // AdultPrices = AdultPrices.map((number) =>
-    //     number * (airportController.Adults + airportController.Child)).toList();
-    // AdultTaxPrices = AdultTaxPrices.map((number) =>
-    //     number * (airportController.Adults + airportController.Child)).toList();
-    // FirstIdentifierAdultTotal = FirstIdentifierAdultTotal.map((number) =>
-    //     number = (airportController.Adults + airportController.Child)).toList();
-
-    // FirstIdentifierAdultTax = FirstIdentifierAdultTax.map((number) =>
-    //     number = (airportController.Adults + airportController.Child)).toList();
-
-    // FirstIdentifierAdultrefundable = FirstIdentifierAdultrefundable.map(
-    //     (number) => number =
-    //         (airportController.Adults + airportController.Child)).toList();
-
-    // SecondIdentifierAdultTotal = FirstIdentifierAdultTotal.map((number) =>
-    //     number = (airportController.Adults + airportController.Child)).toList();
-
-    // SecondIdentifierAdultTax = FirstIdentifierAdultTax.map((number) =>
-    //     number = (airportController.Adults + airportController.Child)).toList();
-
-    // SecondIdentifierAdultrefundable = FirstIdentifierAdultrefundable.map(
-    //     (number) => number =
-    //         (airportController.Adults + airportController.Child)).toList();
     isError = 0;
   }
 
@@ -283,17 +294,8 @@ class OnewayController extends GetxController {
     isReturn = sortedIndexes.map((index) => isReturn[index]).toList();
     isNextDay = sortedIndexes.map((index) => isNextDay[index]).toList();
     AdultPrices = sortedIndexes.map((index) => AdultPrices[index]).toList();
-    // ChildPrices = sortedIndexes.map((index) => ChildPrices[index]).toList();
-    // InfantPrices = sortedIndexes.map((index) => InfantPrices[index]).toList();
-    // AdultBasePrices =
-    //     sortedIndexes.map((index) => AdultBasePrices[index]).toList();
-    // ChildBasePrices =
-    //     sortedIndexes.map((index) => ChildBasePrices[index]).toList();
-    // InfantBasePrices =
-    //     sortedIndexes.map((index) => InfantBasePrices[index]).toList();
     AdultTaxPrices =
         sortedIndexes.map((index) => AdultTaxPrices[index]).toList();
-
     SeatsRemaining =
         sortedIndexes.map((index) => SeatsRemaining[index]).toList();
     Baggage = sortedIndexes.map((index) => Baggage[index]).toList();
@@ -325,7 +327,6 @@ class OnewayController extends GetxController {
         .map((index) => SecondIdentifierAdultCabinBaggage[index])
         .toList();
     MealIncluded = sortedIndexes.map((index) => MealIncluded[index]).toList();
-
     update();
   }
 
@@ -369,20 +370,8 @@ class OnewayController extends GetxController {
     isReturn = sortedIndexes.map((index) => isReturn[index]).toList();
     isNextDay = sortedIndexes.map((index) => isNextDay[index]).toList();
     AdultPrices = sortedIndexes.map((index) => AdultPrices[index]).toList();
-    // ChildPrices = sortedIndexes.map((index) => ChildPrices[index]).toList();
-    // InfantPrices = sortedIndexes.map((index) => InfantPrices[index]).toList();
-    // AdultBasePrices =
-    //     sortedIndexes.map((index) => AdultBasePrices[index]).toList();
-    // ChildBasePrices =
-    //     sortedIndexes.map((index) => ChildBasePrices[index]).toList();
-    // InfantBasePrices =
-    //     sortedIndexes.map((index) => InfantBasePrices[index]).toList();
     AdultTaxPrices =
         sortedIndexes.map((index) => AdultTaxPrices[index]).toList();
-    // ChildTaxPrices =
-    //     sortedIndexes.map((index) => ChildTaxPrices[index]).toList();
-    // InfantTaxPrices =
-    //     sortedIndexes.map((index) => InfantTaxPrices[index]).toList();
     SeatsRemaining =
         sortedIndexes.map((index) => SeatsRemaining[index]).toList();
     Baggage = sortedIndexes.map((index) => Baggage[index]).toList();
@@ -625,20 +614,22 @@ class OnewayController extends GetxController {
         headers: headers,
         body: jsonEncode(searchRequest),
       );
-      log(response.body);
+      // log(response.body);
 
       if (response.statusCode == 200) {
         searchResults.value = jsonDecode(response.body);
         jsonData = jsonDecode(response.body);
+        log('onewaysearch - ' + jsonData.toString());
         isError = 0;
         if (jsonData['status']['success'] == false) {
           isError = 1;
           log(isError.toString());
           update();
         } else {
-          isError = 0;
           length = jsonData['searchResult']['tripInfos']['ONWARD'].length;
-          PopulateLists();
+          print((length.toString() + ' - length'));
+          PopulateListssearch();
+          isError = 0;
           isLoading = false;
           update();
         }
@@ -647,6 +638,7 @@ class OnewayController extends GetxController {
         Get.snackbar('Error', 'Failed to fetch flight data',
             backgroundColor: Colors.redAccent, isDismissible: true);
         Get.back();
+        update();
       }
     } catch (e) {
       // isError = 1;

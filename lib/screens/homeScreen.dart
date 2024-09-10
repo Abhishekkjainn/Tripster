@@ -11,7 +11,7 @@ import 'package:tripster/controllers/bookingController.dart';
 import 'package:tripster/controllers/loginController.dart';
 import 'package:tripster/controllers/passengerController.dart';
 import 'package:tripster/controllers/radiocontroller.dart';
-import 'package:tripster/controllers/returnSearch.dart';
+// import 'package:tripster/controllers/returnSearch.dart';
 import 'package:tripster/controllers/searchcontroller.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:tripster/screens/BlogScreen.dart';
@@ -27,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
   RadioController radioController = Get.find();
   AirportController airportController = Get.find();
   OnewayController onewayController = Get.find();
-  ReturnController returnController = Get.find();
+  // ReturnController returnController = Get.find();
   PassengerController passengerController = Get.find();
   BlogsController blogsController = Get.find();
   Bookingcontroller bookingcontroller = Get.find();
@@ -353,7 +353,7 @@ class _HomeScreenState extends State<HomeScreen> {
       onTap: () async {
         (radioController.selectedRadio == 1)
             ? await airportController.callSearch()
-            : await airportController.callSearchReturn();
+            : await airportController.callSearch();
       },
       child: Container(
         width: double.maxFinite,

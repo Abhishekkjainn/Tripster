@@ -117,6 +117,8 @@ class _SearchResultsState extends State<SearchResults> {
                                 physics: const NeverScrollableScrollPhysics(),
                                 shrinkWrap: true,
                                 itemBuilder: (context, index) {
+                                  print(onewayController.length.toString() +
+                                      'print controller');
                                   return flightCard(onewayController, index);
                                 },
                               )
@@ -181,7 +183,7 @@ class _SearchResultsState extends State<SearchResults> {
 
   GetBuilder<OnewayController> bottomNav(BuildContext context) {
     return GetBuilder<OnewayController>(
-      builder: (onewayController) {
+      builder: (OnewayController) {
         return Padding(
           padding: const EdgeInsets.only(left: 12, right: 12, bottom: 20),
           child: Container(
