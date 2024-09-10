@@ -353,7 +353,7 @@ class _HomeScreenState extends State<HomeScreen> {
       onTap: () async {
         (radioController.selectedRadio == 1)
             ? await airportController.callSearch()
-            : await airportController.callSearch();
+            : await airportController.callSearchReturn();
       },
       child: Container(
         width: double.maxFinite,

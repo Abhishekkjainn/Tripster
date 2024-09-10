@@ -4,10 +4,13 @@ import 'package:get/get.dart';
 import 'package:tripster/controllers/bookingController.dart';
 import 'package:tripster/controllers/passengerController.dart';
 import 'package:tripster/controllers/radiocontroller.dart';
+import 'package:tripster/controllers/returnController.dart';
+import 'package:tripster/controllers/returnController2.dart';
 import 'package:tripster/controllers/returnSearch.dart';
 import 'package:tripster/controllers/searchcontroller.dart';
 import 'package:tripster/resultsPages/ReturnResult.dart';
 import 'package:tripster/resultsPages/SearchResult.dart';
+import 'package:tripster/resultsPages/returnsearchResult.dart';
 // import 'package:tripster/tripsScreen/completedTripspage.dart';
 
 final onewayController = Get.put(OnewayController());
@@ -16,6 +19,8 @@ final searchController = Get.put(SearchController());
 final returnController = Get.put(ReturnController());
 final passengerController = Get.put(PassengerController());
 final bookingcontroller = Get.put(Bookingcontroller());
+final returnOnwardController = Get.put(ReturnOnwardController());
+final returnReturnController = Get.put(ReturnreturnController());
 
 class AirportController extends GetxController {
   String fromAirportCode = 'FROM';
@@ -159,8 +164,10 @@ class AirportController extends GetxController {
       }
     };
     print("Return Request: $returnRequest");
-    Get.to(() => const ReturnResults(), transition: Transition.rightToLeft);
-    await returnController.doSearch(returnRequest);
+    Get.to(() => const ReturnSearchResults(),
+        transition: Transition.rightToLeft);
+    await returnOnwardController.doSearch(returnRequest);
+    await returnReturnController.doSearch2(returnRequest);
   }
 
   callonewayCancellation(String Id) async {
@@ -174,7 +181,7 @@ class AirportController extends GetxController {
     final cancellationRequest = {
       "priceIds": [Id, Id2]
     };
-    await returnController.getCancellation(cancellationRequest);
+    await returnOnwardController.getCancellation(cancellationRequest);
   }
 
   callonewaySeatsMap(String BookingId) async {

@@ -5,6 +5,8 @@ import 'package:get_storage/get_storage.dart';
 // import 'package:tripster/controllers/blogscontroller.dart';
 // import 'package:tripster/controllers/bookingController.dart';
 import 'package:tripster/controllers/loginController.dart';
+import 'package:tripster/controllers/returnController.dart';
+import 'package:tripster/controllers/returnController2.dart';
 // import 'package:tripster/controllers/passengerController.dart';
 // import 'package:tripster/controllers/radiocontroller.dart';
 // import 'package:tripster/controllers/returnSearch.dart';
@@ -64,6 +66,8 @@ class _SplashState extends State<Splash> {
   final returnController = Get.put(ReturnController());
   final passengerController = Get.put(PassengerController());
   final blogsController = Get.put(BlogsController());
+  final onwardReturnController = Get.put(ReturnOnwardController());
+  final returnReturnController = Get.put(ReturnreturnController());
   @override
   void initState() {
     super.initState();
