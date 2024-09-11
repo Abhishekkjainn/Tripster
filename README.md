@@ -1,16 +1,12 @@
-# tripster
+# Tripster
 
-A new Flutter project.
+**Tripster** is a real-time domestic flight booking application, built using Flutter and integrated with the **Tripjack Air API**. Designed to provide a seamless experience for travelers, Tripster allows users to search for flights, compare prices, and manage bookings from 137 domestic airports across India. The app ensures smooth navigation, offers a highly responsive user interface, and is compatible across multiple platforms.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- **Real-Time Flight Search**: Search flights by departure and arrival cities, dates, and times, with results updated in real-time.
+- **Price Comparison**: Compare ticket prices across various airlines to help users find the best deals.
+- **Flight Information**: View important flight details, including layovers, flight durations, and airline information.
+- **Booking Management**: Save, view, and manage flight bookings directly within the app for easy access to upcoming trips.
+- **Responsive Design**: The app features a sleek, intuitive user interface for an optimal user experience on all devices.
+- **API Integration**: Powered by the **Tripjack Air API**, Tripster processes over 6,000 flight transactions daily, ensuring real-time data updates and accurate flight availability.
