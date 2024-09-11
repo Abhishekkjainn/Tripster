@@ -627,11 +627,11 @@ class _BaggagePagereturnState extends State<BaggagePagereturn> {
                   children: [
                     Text(
                       calcBefore(returnOnwardController
-                                  .DepDate[widget.onwardkey])
+                                  .ArrDate[widget.onwardkey])
                               .substring(0, 10) +
                           "  " +
                           calcBefore(returnOnwardController
-                                  .DepDate[widget.onwardkey])
+                                  .ArrDate[widget.onwardkey])
                               .substring(11, 16),
                       style: TextStyle(
                           color: Colors.black,
@@ -720,12 +720,15 @@ class _BaggagePagereturnState extends State<BaggagePagereturn> {
                               airportController.Adults &&
                           passengerController.ChildPassengername.length ==
                               airportController.Child)
-                      ? Get.to(
-                          () => BaggagePagereturn2(
-                                onwardkey: widget.onwardkey,
-                                returnkey: widget.returnkey,
-                              ),
-                          transition: Transition.rightToLeft)
+                      ? (returnOnwardController.BookingId.length > 0)
+                          ? Get.to(
+                              () => BaggagePagereturn2(
+                                    onwardkey: widget.onwardkey,
+                                    returnkey: widget.returnkey,
+                                  ),
+                              transition: Transition.rightToLeft)
+                          : Get.snackbar(
+                              'Error', 'Booking ID not Generated Please Retry')
                       : Get.snackbar('Please Add All Passengers Details',
                           'To Process Your Booking we need your Details..',
                           backgroundColor: Colors.white,

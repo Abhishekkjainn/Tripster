@@ -8,7 +8,7 @@ import 'package:tripster/controllers/returnController.dart';
 import 'package:tripster/controllers/returnController2.dart';
 import 'package:tripster/controllers/returnSearch.dart';
 import 'package:tripster/controllers/searchcontroller.dart';
-import 'package:tripster/resultsPages/ReturnResult.dart';
+// import 'package:tripster/resultsPages/ReturnResult.dart';
 import 'package:tripster/resultsPages/SearchResult.dart';
 import 'package:tripster/resultsPages/returnsearchResult.dart';
 // import 'package:tripster/tripsScreen/completedTripspage.dart';
@@ -179,7 +179,7 @@ class AirportController extends GetxController {
 
   callreturnonwardCancellation(String Id, String Id2) async {
     final cancellationRequest = {
-      "priceIds": [Id, Id2]
+      "priceIds": ["${Id.toString()}", "${Id2.toString()}"]
     };
     await returnOnwardController.getCancellation(cancellationRequest);
   }

@@ -1,45 +1,49 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tripster/bookingScreens/ReturnLuggage.dart';
-import 'package:tripster/bookingScreens/ReturnMealonward.dart';
-import 'package:tripster/bookingScreens/ReturnSeatsonward.dart';
+import 'package:tripster/bookingScreens/Luggagepage.dart';
+import 'package:tripster/bookingScreens/Mealpage.dart';
+import 'package:tripster/bookingScreens/Seatspage.dart';
 import 'package:tripster/controllers/airportcontroller.dart';
 import 'package:tripster/controllers/passengerController.dart';
+import 'package:tripster/controllers/returnController.dart';
+import 'package:tripster/controllers/returnController2.dart';
 import 'package:tripster/controllers/returnSearch.dart';
-import 'package:tripster/controllers/searchcontroller.dart';
 
 class ReturnSeatMealLuggage extends StatefulWidget {
-  final int onind;
-  final int retind;
+  final int onwardkey;
+  final int returnkey;
   const ReturnSeatMealLuggage(
-      {super.key, required this.onind, required this.retind});
+      {super.key, required this.onwardkey, required this.returnkey});
 
   @override
   State<ReturnSeatMealLuggage> createState() => _ReturnSeatMealLuggageState();
 }
 
 class _ReturnSeatMealLuggageState extends State<ReturnSeatMealLuggage> {
-  int selectedIndex = 1;
-  OnewayController onewayController = Get.find();
+  int selectedonwardkey = 1;
+  // returnOnwardController returnOnwardController = Get.find();
   AirportController airportController = Get.find();
   ReturnController returnController = Get.find();
   PassengerController passengerController = Get.find();
+  ReturnOnwardController returnOnwardController = Get.find();
+  ReturnreturnController returnReturnController = Get.find();
 
-  List SelectionScreens = [OnwardSeats(), OnwardMeal(), OnwardLuggage()];
+  List SelectionScreens = [seatsPage(), MealPage(), LuggagePage()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: baggagepageappbar(),
-      bottomNavigationBar: FlightTypebottombar(widget.onind),
+      bottomNavigationBar: FlightTypebottombar(widget.onwardkey),
       body: Scaffold(
         appBar: selectionAppBar(),
-        body: SelectionScreens[selectedIndex - 1],
+        body: SelectionScreens[selectedonwardkey - 1],
       ),
     );
   }
 
-  Container FlightTypebottombar(index) {
+  Container FlightTypebottombar(onwardkey) {
     return Container(
       height: 80,
       width: double.maxFinite,
@@ -59,10 +63,7 @@ class _ReturnSeatMealLuggageState extends State<ReturnSeatMealLuggage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Rs " +
-                      (returnController.selectedFareonward +
-                              returnController.selectedFarereturn)
-                          .toStringAsFixed(2),
+                  "Rs " + returnOnwardController.selectedFare.toString(),
                   style: TextStyle(
                       color: Colors.black,
                       fontSize: 18,
@@ -88,7 +89,7 @@ class _ReturnSeatMealLuggageState extends State<ReturnSeatMealLuggage> {
               onTap: () {
                 // Get.to(
                 //     () => ReviewandPay(
-                //           index: index,
+                //           onwardkey: onwardkey,
                 //         ),
                 //     transition: Transition.rightToLeft);
               },
@@ -118,14 +119,14 @@ class _ReturnSeatMealLuggageState extends State<ReturnSeatMealLuggage> {
     return AppBar(
       centerTitle: true,
       excludeHeaderSemantics: true,
-      forceMaterialTransparency: true,
+      // forceMaterialTransparency: true,
       scrolledUnderElevation: 0,
       automaticallyImplyLeading: false,
       backgroundColor: Colors.white,
       title: Container(
         height: 40,
         width: double.maxFinite,
-        // decoration: BoxDecoration(color: Colors.blue),
+        decoration: BoxDecoration(color: Colors.white),
         child: Row(
           children: [
             Expanded(
@@ -133,7 +134,7 @@ class _ReturnSeatMealLuggageState extends State<ReturnSeatMealLuggage> {
                 child: GestureDetector(
                   onTap: () {
                     setState(() {
-                      selectedIndex = 1;
+                      selectedonwardkey = 1;
                     });
                   },
                   child: Container(
@@ -146,8 +147,9 @@ class _ReturnSeatMealLuggageState extends State<ReturnSeatMealLuggage> {
                           fontWeight: FontWeight.w600),
                     ),
                     decoration: BoxDecoration(
-                        // (selectedIndex == 1)?Border(bottom: BorderSide(color: Colors.black,width: 2)):Border.none(),
-                        border: (selectedIndex == 1)
+                        color: Colors.white,
+                        // (selectedonwardkey == 1)?Border(bottom: BorderSide(color: Colors.black,width: 2)):Border.none(),
+                        border: (selectedonwardkey == 1)
                             ? Border(
                                 bottom:
                                     BorderSide(color: Colors.blue, width: 2))
@@ -159,7 +161,7 @@ class _ReturnSeatMealLuggageState extends State<ReturnSeatMealLuggage> {
                 child: GestureDetector(
                   onTap: () {
                     setState(() {
-                      selectedIndex = 2;
+                      selectedonwardkey = 2;
                     });
                   },
                   child: Container(
@@ -172,7 +174,7 @@ class _ReturnSeatMealLuggageState extends State<ReturnSeatMealLuggage> {
                           fontWeight: FontWeight.w600),
                     ),
                     decoration: BoxDecoration(
-                        border: (selectedIndex == 2)
+                        border: (selectedonwardkey == 2)
                             ? Border(
                                 bottom:
                                     BorderSide(color: Colors.blue, width: 2))
@@ -184,7 +186,7 @@ class _ReturnSeatMealLuggageState extends State<ReturnSeatMealLuggage> {
             //     child: GestureDetector(
             //       onTap: () {
             //         setState(() {
-            //           selectedIndex = 3;
+            //           selectedonwardkey = 3;
             //         });
             //       },
             //       child: Container(
@@ -197,7 +199,7 @@ class _ReturnSeatMealLuggageState extends State<ReturnSeatMealLuggage> {
             //               fontWeight: FontWeight.w600),
             //         ),
             //         decoration: BoxDecoration(
-            //             border: (selectedIndex == 3)
+            //             border: (selectedonwardkey == 3)
             //                 ? Border(
             //                     bottom:
             //                         BorderSide(color: Colors.blue, width: 2))
@@ -215,10 +217,19 @@ class _ReturnSeatMealLuggageState extends State<ReturnSeatMealLuggage> {
       toolbarHeight: 50,
       backgroundColor: const Color.fromARGB(255, 255, 214, 1),
       centerTitle: true,
+      automaticallyImplyLeading: false,
+      leading: GestureDetector(
+          onTap: () {
+            Get.back();
+          },
+          child: Icon(
+            CupertinoIcons.back,
+            color: Colors.white,
+          )),
       title: const Text(
-        'Add Ons (Onward)',
+        'Add Ons',
         style: TextStyle(
-            color: Colors.white, fontSize: 20, fontWeight: FontWeight.w900),
+            color: Colors.white, fontSize: 20, fontWeight: FontWeight.w700),
       ),
     );
   }

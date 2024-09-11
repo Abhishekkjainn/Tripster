@@ -741,32 +741,43 @@ class ReturnreturnController extends GetxController {
     'Content-Type': 'application/json'
   };
 
-  Future<void> getCancellation2(
-      Map<String, dynamic> cancellationRequest) async {
-    const String endpoint = '/fms/v1/review';
-    final String url = '$apiUrl$endpoint';
+  // Future<void> getCancellation2(
+  //     Map<String, dynamic> cancellationRequest) async {
+  //   const String endpoint = '/fms/v1/review';
+  //   final String url = '$apiUrl$endpoint';
 
-    try {
-      final response = await http.post(
-        Uri.parse(url),
-        headers: headers2,
-        body: jsonEncode(cancellationRequest),
-      );
-      log(response.body);
-      if (response.statusCode == 200) {
-        searchResultscancellation2.value = jsonDecode(response.body);
-        cancelData2 = jsonDecode(response.body);
-        populateFarerules2();
-        update();
-      } else {
-        Get.snackbar('Error', 'Failed to fetch flight data',
-            backgroundColor: Colors.redAccent, isDismissible: true);
-        Get.back();
-      }
-    } catch (e) {
-      log(e.toString());
-    }
-  }
+  //   try {
+  //     final response = await http.post(
+  //       Uri.parse(url),
+  //       headers: headers2,
+  //       body: jsonEncode(cancellationRequest),
+  //     );
+  //     log(response.body);
+  //     cancelData2 = jsonDecode(response.body);
+  //     if (response.statusCode == 200) {
+  //       searchResultscancellation2.value = jsonDecode(response.body);
+
+  //       if (cancelData2['status']['success'] == false) {
+  //         BookingId2.add(cancelData2['id'].toString());
+  //       } else {
+  //         populateFarerules2();
+  //       }
+  //       // populateFarerules2();
+  //       update();
+  //     } else {
+  //       if (cancelData2['status']['success'] == false) {
+  //         BookingId2.add(cancelData2['id'].toString());
+  //       } else {
+  //         populateFarerules2();
+  //       }
+  //       Get.snackbar('Error', 'Failed to fetch flight data',
+  //           backgroundColor: Colors.redAccent, isDismissible: true);
+  //       Get.back();
+  //     }
+  //   } catch (e) {
+  //     log(e.toString());
+  //   }
+  // }
 
   int rows2 = 0;
   int Columns2 = 0;
@@ -853,6 +864,7 @@ class ReturnreturnController extends GetxController {
           isSeatError2 = 1;
           log('isseatError ${isSeatError2}');
           log("Seat Data Error : $seatData2");
+
           Get.snackbar('Error',
               'Error Fetching Seat Data. Please Try Again after Sometime.');
           update();

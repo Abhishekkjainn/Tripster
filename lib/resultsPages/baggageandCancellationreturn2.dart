@@ -10,8 +10,10 @@ import 'package:tripster/controllers/passengerController.dart';
 import 'package:tripster/controllers/returnController.dart';
 import 'package:tripster/controllers/returnController2.dart';
 import 'package:tripster/controllers/returnSearch.dart';
-import 'package:tripster/controllers/searchcontroller.dart';
-import 'package:tripster/resultsPages/seatMealLuggage.dart';
+// import 'package:tripster/resultsPages/returnSeatMealLuggage.dart';
+import 'package:tripster/resultsPages/returnseatmeal.dart';
+// import 'package:tripster/controllers/searchcontroller.dart';
+// import 'package:tripster/resultsPages/seatMealLuggage.dart';
 
 class BaggagePagereturn2 extends StatefulWidget {
   final int onwardkey;
@@ -52,10 +54,7 @@ class _BaggagePagereturn2State extends State<BaggagePagereturn2> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    print(returnReturnController.Id2[widget.returnkey].toString());
-    airportController.callreturnonwardCancellation(
-        returnOnwardController.Id[widget.onwardkey].toString(),
-        returnReturnController.Id2[widget.returnkey].toString());
+    // print(returnReturnController.Id2[widget.returnkey].toString());
     startErrorTimer();
   }
 
@@ -719,10 +718,9 @@ class _BaggagePagereturn2State extends State<BaggagePagereturn2> {
                               airportController.Adults &&
                           passengerController.ChildPassengername.length ==
                               airportController.Child)
-                      ? Get.snackbar('Done', 'All Passengers Added',
-                          backgroundColor: Colors.green,
-                          borderColor: Colors.grey,
-                          borderWidth: 2)
+                      ? Get.to(() => ReturnSeatMealLuggage(
+                          onwardkey: widget.onwardkey,
+                          returnkey: widget.returnkey))
                       : Get.snackbar('Please Add All Passengers Details',
                           'To Process Your Booking we need your Details..',
                           backgroundColor: Colors.white,

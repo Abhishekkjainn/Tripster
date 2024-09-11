@@ -110,8 +110,7 @@ class ReturnOnwardController extends GetxController {
 
   PopulateListssearch() {
     cleanList();
-    isError = 0;
-    print(length.toString() + ' populate length ');
+
     for (int i = 0; i < length; i++) {
       AirlineList.add(jsonData['searchResult']['tripInfos']['ONWARD'][i]['sI']
           [0]['fD']['aI']['name']);
@@ -757,13 +756,28 @@ class ReturnOnwardController extends GetxController {
         headers: headers2,
         body: jsonEncode(cancellationRequest),
       );
-      log(response.body);
+      cancelData = jsonDecode(response.body);
+
       if (response.statusCode == 200) {
+        log(response.body);
         searchResultscancellation.value = jsonDecode(response.body);
         cancelData = jsonDecode(response.body);
-        populateFarerules();
+        if (cancelData['status']['success'] == false) {
+          BookingId.add(cancelData['id'].toString());
+        } else {
+          populateFarerules();
+          returnReturnController.populateFarerules2();
+        }
         update();
       } else {
+        if (cancelData['status']['success'] == false) {
+          BookingId.add(cancelData['id'].toString());
+          returnReturnController.BookingId2.add(cancelData['id'].toString());
+        } else {
+          populateFarerules();
+          returnReturnController.populateFarerules2();
+        }
+        log(cancelData.toString() + 'Failed');
         Get.snackbar('Error', 'Failed to fetch flight data',
             backgroundColor: Colors.redAccent, isDismissible: true);
         Get.back();
